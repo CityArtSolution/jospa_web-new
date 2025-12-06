@@ -1,691 +1,300 @@
- @php
-    use App\Models\Branch;
-    $branches = Branch::where('status' , 1)->get();
-@endphp
- <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background: #f5f5f5;
-        }
-
-        /* Demo content area */
-        .demo-content {
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .demo-content h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .demo-content p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-        }
-
-        /* Footer Styles */
-        .footer-section {
-            position: relative;
-            background: #4D4541;
-            color: #fff;
-            margin-top: 0;
-
-            padding-top: 150px;
-            padding-bottom: 50px;
-            text-align: center;
-            direction: rtl;
-            overflow: hidden;
-        }
-
-        .footer-background-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('{{ asset('images/footer-bg-spa.jpg') }}');
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-        }
-        .footer-background-layer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(43, 38, 36, 0.75);
-        }
-        .footer-curve {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: translateY(-100%);
-            z-index: 1;
-        }
-        .footer-curve-top {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-            line-height: 0;
-            z-index: 5;
-            transform: translateY(-99%);
-        }
-        .footer-curve-top svg {
-            display: block;
-            width: 100%;
-            height: 150px;
-        }
-
-        .footer-curve-top .shape-fill {
-            /* لون الموجة يطابق لون الخلفية الرئيسية لـ body */
-            fill: #f5f5f5;
-        }
-        .footer-curve svg {
-            display: block;
-            width: 100%;
-            height: 120px;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 أعمدة ثابتة */
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-
-        .footer-column {
-            text-align: center;
-        }
-
-        .footer-column h5 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .footer-column p {
-            margin-bottom: 8px;
-            color: #bbb;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .footer-column p i {
-            margin-left: 8px;
-        }
-
-        .footer-link {
-            color: #bbb;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: #fff;
-        }
-
-        /* WhatsApp Subscription */
-.subscription-form {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* محاذاة الحقل والزر عموديًا */
-    gap: 10px;
-    margin-bottom: 25px;
-    flex-wrap: nowrap; /* منع الانتقال لسطر جديد */
-}
-
-.subscription-input {
-    padding: 12px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1rem;
-    width: 180px; /* اضبط حسب الحاجة */
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.whatsapp-btn {
-    padding: 12px 24px;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-        .whatsapp-btn:hover {
-            background: #1fb855;
-            transform: translateY(-2px);
-        }
-
-        /* Social Icons */
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            color: #E8D3C4;
-            font-size: 1.1rem;
-            border: 1px solid #E8D3C4;
-            border-radius: 5px;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        /* .social-icons a:hover {
-            color: #d4af37;
-            transform: scale(1.2);
-        } */
-
-
-        .social-icons a:hover {
-            background-color: #E8D3C4;
-            color: #4D4541;
-            transform: scale(1.1);
-        }
-       
-        /* Logo */
-        .footer-logo-container {
-            text-align: center;
-            margin: 50px 0 30px 0;
-        }
-
-        /* .footer-logo {
-            max-height: 150px;
-            max-width: 300px;
-        } */
-
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #E8D3C4;
-            letter-spacing: 5px;
-            margin-bottom: 5px;
-        }
-        .footer-logo-exp {
-             font-family: 'Almarai', sans-serif;
-             font-size: 0.9rem;
-             color: #E8D3C4;
-             margin-bottom: 25px;
-             font-weight: 300;
-             letter-spacing: 2px;
-        }
-
-        .footer-description {
-            color: #E8D3C4;
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            padding: 0 50px; /* تقليل عرض النص في المنتصف */
-        }
-
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .contact-btn {
-            display: flex;
-            align-items: center;
-            padding: 12px 25px;
-            background-color: #6D6664;
-            color: #E8D3C4;
-            border: 1px solid #E8D3C4;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover {
-            background-color: #E8D3C4;
-            color: #4D4541;
-            border-color: #4D4541;
-            transform: translateY(-2px);
-        }
-
-        .contact-btn i {
-            margin-left: 10px;
-            font-size: 1rem;
-        }
-
-        /* Payment Icons */
-        .payment-icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .payment-card {
-            background: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .payment-card:hover {
-            transform: scale(1.1);
-        }
-
-        .payment-card span {
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-
-        .payment-visa { color: #1434CB; }
-        .payment-mastercard { color: #EB001B; }
-        .payment-mada { color: #00A859; }
-        .payment-tabby { color: #3BDEAE; }
-
-        /* Copyright */
-        
-        .footer-copyright {
-            padding-top: 20px;
-            border-top: 1px solid rgba(232, 211, 196, 0.2);
-            color: #E8D3C4;
-            font-size: 0.85rem;
-        }
-        /* Responsive */
-        /* Responsive */
-        @media (max-width: 768px) {
-            .footer-section {
-                padding-top: 100px;
-            }
-            .footer-curve-top {
-                height: 100px;
-            }
-            .footer-curve-top svg {
-                height: 100px;
-            }
-            .footer-description {
-                padding: 0 15px;
-                font-size: 0.9rem;
-            }
-            .contact-buttons {
-                flex-direction: column;
-                gap: 10px;
-                max-width: 300px;
-                margin: 0 auto 30px auto;
-            }
-            .contact-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* @media (max-width: 768px) {
-            .demo-content h1 {
-                font-size: 2rem;
-            }
-
-            .demo-content p {
-                font-size: 1.2rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .footer-curve svg {
-                height: 60px;
-            }
-
-            .subscription-form {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .subscription-input {
-                width: 200px;
-            }
-
-            .payment-icons {
-                gap: 15px;
-            }
-
-            .payment-card {
-                padding: 10px 15px;
-            }
-
-            .payment-card span {
-                font-size: 1rem;
-            }
-        } */
-    </style>
-
-
-    <!-- Footer Section -->
-    <footer class="footer-section">
-        <!-- Wave Curve -->
-<div class="footer-curve">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150" preserveAspectRatio="none">
-        <path fill="#111" fill-opacity="1"
-              d="M0,150
-                 C360,0 1080,0 1440,150
-                 L1440,150 L0,150 Z"></path>
-    </svg>
-</div>
 <style>
-/* Background image behind footer text */
-.footer-content {
-    position: relative;
-    z-index: 2; /* تأكد النص فوق الصورة */
+/* -------------------------------------- */
+/* Global Styles (Standard) */
+/* -------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* إضافة الصورة كخلفية مع لمعة */
-.footer-content::before {
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: #f5f5f5;
+}
+
+/* -------------------------------------- */
+/* Footer Styles (JO | SPA Design) */
+/* -------------------------------------- */
+.footer-section {
+    position: relative;
+    background: #4D4541; /* بني داكن */
+    color: #fff;
+    margin-top: 0;
+    padding-top: 150px; /* مسافة من الموجة */
+    padding-bottom: 50px;
+    text-align: center;
+    direction: rtl;
+    overflow: hidden;
+}
+
+.footer-background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('{{ asset('images/footer-bg-spa.jpg') }}'); // change image
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+.footer-background-layer::before {
     content: '';
     position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    background: url('https://city2tec.com/images/samilogo.png') no-repeat center/contain;
-    opacity: 0.15; /* زودت الشفافية شوي ليبان أكثر */
-    filter: blur(2px) brightness(1.15); /* ضبابية خفيفة وواضح أكتر */
-    z-index: 1;
-    pointer-events: none;
-}
-
-</style>
-
-
-        <!-- Footer Content -->
-       <div class="footer-content">
-        <div class="footer-grid">
-            <!-- Branches -->
-            <div class="footer-column">
-                <h5>{{ __('messagess.Branch Addresses') }}</h5>
-                @foreach($branches as $branch)
-                    <p>{{$branch->name}}</p>
-                    <p>{{ $branch->description ?? '' }}</p>
-                    <p><i class="bi bi-telephone-fill"></i>{{$branch->contact_number}}</p>
-                @endforeach
-            </div>
-
-            <!-- Help -->
-            <div class="footer-column">
-                <h5>{{ __('messagess.Help') }}</h5>
-                <p><a href="{{ route('frontend.contact') }}" class="footer-link">{{ __('messagess.nav_contact') }}</a></p>
-                <p><a href="{{ route('frontend.TermsAndConditions') }}" class="footer-link">{{ __('messagess.Privacy Policy') }}</a></p>
-                <p><a href="{{ route('frontend.TermsAndConditions') }}" class="footer-link">{{ __('messagess.Terms & Conditions') }}</a></p>
-            </div>
-
-            <!-- About SAMI -->
-            <div class="footer-column">
-                <h5>{{ __('messagess.about Sami') }}</h5>
-                <p><a href="{{ route('frontend.home') }}" class="footer-link">{{ __('messagess.nav_home') }}</a></p>
-                <p><a href="{{ route('frontend.about') }}" class="footer-link">{{ __('messagess.nav_about') }}</a></p>
-                <p><a href="{{ route('frontend.services') }}" class="footer-link">{{ __('messagess.nav_services') }}</a></p>
-                <p><a href="{{ route('frontend.branches') }}" class="footer-link">{{ __('messagess.our_branches') }}</a></p>
-                <p><a href="{{ route('frontend.Packages') }}" class="footer-link">{{ __('messagess.nav_package') }}</a></p>
-            </div>
-
-            <!-- Join Us -->
-            <div class="footer-column">
-                <h5>{{ __('messagess.Join Us For Latest Offers') }}</h5>
-
-                <div class="subscription-form" style="justify-content: center;">
-                    <div class="input-wrapper">
-                        <input type="tel" class="subscription-input" placeholder="+966" id="phoneInput" dir="ltr">
-                        <button class="join-btn" onclick="joinOffers()">{{ __('messagess.Join') }}</button>
-                    </div>
-                </div>
-
-                <button class="whatsapp-btn full-width" onclick="subscribeWhatsApp()">
-                    <i class="bi bi-whatsapp"></i> {{ __('messagess.Quick WhatsApp Contact') }}
-                </button>
-            </div>
-<style>
-    .input-wrapper {
-    position: relative;
-    display: flex;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 280px;
+    height: 100%;
+    background: rgba(43, 38, 36, 0.85); /* تظليل داكن أكثر */
 }
 
-.subscription-input {
-    flex: 1;
-    padding: 14px 90px 14px 15px; /* مساحة لزر انضم */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-radius: 50px;  /* حواف دائرية قوية */
-    font-size: 1rem;
-    outline: none;
-}
-
-.subscription-input::placeholder {
-    color: #bbb;
-}
-
-.join-btn {
+/* الموجة العلوية */
+.footer-curve-top {
     position: absolute;
-    top: 50%;
-    right: 6px;
-    transform: translateY(-50%);
-    padding: 10px 20px;
-    background: #d4af37;
-    border: none;
-    border-radius: 50px; /* نفس الحواف */
-    color: #111;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.join-btn:hover {
-    background: #c19d2b;
-}
-
-.whatsapp-btn.full-width {
-    margin-top: 12px;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 280px;
-    padding: 14px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    background: #25D366;
-    border-radius: 50px; /* نفس الشكل */
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: all 0.3s ease;
+    height: 150px;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 5;
+    transform: translateY(-99%);
+}
+.footer-curve-top svg {
+    display: block;
+    width: 100%;
+    height: 150px;
+}
+.footer-curve-top .shape-fill {
+    fill: #f5f5f5; /* لون خلفية الصفحة الرئيسي */
 }
 
-.whatsapp-btn.full-width:hover {
-    background: #1fb855;
+.footer-content {
+    max-width: 900px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
 }
 
-</style>
-        </div>
-
-            <!-- Payment Methods -->
-          <!-- Payment Methods -->
-<style>
+/* **إخفاء العناصر غير المطلوبة في التصميم المركزي** */
+.footer-grid {
+    display: none; 
+}
+.subscription-form,
+.whatsapp-btn.full-width,
 .payment-icons {
+    display: none; 
+}
+
+.footer-logo-container {
+    text-align: center;
+    margin: 0 0 40px 0;
+}
+.footer-logo {
+    font-family: 'Playfair Display', serif; 
+    font-size: 3rem; 
+    font-weight: 400;
+    color: #E8D3C4;
+    letter-spacing: 15px; 
+    margin-bottom: 5px;
+}
+.footer-logo-exp {
+    font-family: 'Almarai', sans-serif; 
+    font-size: 1rem;
+    color: #E8D3C4;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
+
+.footer-description {
+    color: #bbb;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    padding: 0 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
-}
-
-.payment-card {
-    background: white;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;  /* تحديد عرض موحد */
-    height: 50px; /* تحديد ارتفاع موحد */
-}
-
-.payment-card:hover {
-    transform: scale(1.05);
-}
-
-.payment-card img.payment-icon {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* لتجنب تشوه الصورة */
-}
-</style>
-
-<div class="payment-icons">
-    <div class="payment-card">
-        <img src="https://city2tec.com/images/O.webp" alt="Visa" class="payment-icon">
-    </div>
-    <div class="payment-card">
-        <img src="https://city2tec.com/images/OI.webp" alt="Mastercard" class="payment-icon">
-    </div>
-    <div class="payment-card">
-        <img src="https://city2tec.com/images/OIP.webp" alt="Mada" class="payment-icon">
-    </div>
-    <div class="payment-card">
-        <img src="https://city2tec.com/images/OIPp.jfif" alt="Tabby" class="payment-icon">
-    </div>
-</div>
-
-<style>
-    .payment-icons {
-    display: flex;
-    justify-content: center;
     gap: 20px;
     margin-bottom: 40px;
-    flex-wrap: wrap;
 }
 
-.payment-card {
-    background: transparent; /* ممكن تترك الخلفية شفافة أو لون خفيف */
-    padding: 8px;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-    cursor: pointer;
+.contact-btn {
     display: flex;
     align-items: center;
+    padding: 12px 30px;
+    background-color: #9F8C6D; /* لون ترابي دافئ */
+    color: #fff;
+    border: 1px solid #9F8C6D;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 250px; 
     justify-content: center;
 }
 
-.payment-card:hover {
+.contact-btn:hover {
+    background-color: #E8D3C4;
+    color: #4D4541;
+    border-color: #E8D3C4;
+    transform: translateY(-2px);
+}
+
+.contact-btn i {
+    margin-left: 10px;
+    font-size: 1.1rem;
+}
+
+/* ستايل أيقونات التواصل الاجتماعي */
+.social-icons-main {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.social-icons-main a {
+    color: #E8D3C4;
+    font-size: 1.1rem;
+    border: 1px solid #E8D3C4;
+    border-radius: 8px; /* حواف مربعة قليلاً */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icons-main a:hover {
+    background-color: #E8D3C4;
+    color: #4D4541;
     transform: scale(1.1);
 }
 
-.payment-icon {
-    width: 60px;  /* اضبط الحجم حسب ما يلائم */
-    height: auto;
-    object-fit: contain;
+.footer-copyright {
+    padding-top: 25px;
+    border-top: 1px solid rgba(232, 211, 196, 0.2);
+    color: #E8D3C4;
+    font-size: 0.9rem;
+    text-align: center;
+    opacity: 0.7;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-section {
+        padding-top: 100px;
+    }
+    .footer-curve-top {
+        height: 100px;
+    }
+    .footer-curve-top svg {
+        height: 100px;
+    }
+    .footer-logo {
+        font-size: 2.2rem;
+        letter-spacing: 10px;
+    }
+    .footer-description {
+        padding: 0 10px;
+    }
+    .contact-buttons {
+        gap: 10px;
+    }
+    .contact-btn {
+        min-width: 80%;
+        max-width: 300px;
+    }
+}
 </style>
 
-            <!-- Copyright -->
-            <div class="footer-copyright">
-            </div>
+<footer class="footer-section">
+    <div class="footer-background-layer"></div>
+
+    <div class="footer-curve-top">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66 92.83C906.67 72 823.75 51.44 743.84 43.41c-82.5-8.31-182.25 18-219.79 38.48-111 61.15-180.71 131.5-220.19 146.43-30.82 11.85-61.94 22.95-101.41 29.86-75.14 13.56-126.92 23.36-196.53 47.04V0h1200Z" class="shape-fill"></path>
+        </svg>
+    </div>
+    
+    <div class="footer-content">
+        
+        <div class="footer-logo-container">
+            <h1 class="footer-logo">JO | SPA</h1>
+            <p class="footer-logo-exp">EXPERIENCE RIYADH</p>
         </div>
-    </footer>
 
-    <script>
-        // WhatsApp Subscription Function
-        function subscribeWhatsApp() {
-            const phoneInput = document.getElementById('phoneInput');
-            const phoneNumber = phoneInput.value.trim();
+        <p class="footer-description">
+             {{ __('frontend.footer_description') }}
+        </p>
 
-            if (phoneNumber) {
-                // Replace with your actual WhatsApp business number
-                const whatsappNumber = '966555666777'; // Your WhatsApp number
-                const message = encodeURIComponent('أريد الاشتراك في العروض. رقم الهاتف: ' + phoneNumber);
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+        <div class="contact-buttons">
+            <a href="tel:0000000000" class="contact-btn">
+                <i class="bi bi-telephone-fill"></i> 000 0000 0000
+            </a>
+            <a href="tel:0000000000" class="contact-btn">
+                <i class="bi bi-telephone-fill"></i> 000 0000 0000
+            </a>
+            <a href="mailto:contact@jospa.com.sa" class="contact-btn">
+                <i class="bi bi-envelope-fill"></i> contact@jospa.com.sa
+            </a>
+        </div>
 
-                window.open(whatsappUrl, '_blank');
-                phoneInput.value = '';
-            } else {
-                alert('الرجاء إدخال رقم الهاتف');
-            }
-        }
+        <div class="social-icons-main">
+            <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
+        </div>
+        
 
-        // Allow Enter key to submit
-        document.getElementById('phoneInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                subscribeWhatsApp();
-            }
-        });
+        <div class="footer-copyright">
+             &copy; {{ date('Y') }} JO SPA. All rights reserved.
+        </div>
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
+    </div>
+</footer>
+
+<script>
+    // تم إلغاء وظائف الاشتراك القديمة لعدم وجودها في التصميم الجديد
+    function subscribeWhatsApp() {
+        // يمكن وضع منطق لإرسال رسالة واتساب عامة هنا إذا لزم الأمر.
+        // مثال: window.open('https://wa.me/966555666777', '_blank');
+        alert('للتواصل السريع، يرجى الضغط على أحد أزرار الهاتف أعلاه.');
+    }
+
+    // وظيفة الانضمام محذوفة لعدم وجود حقل إدخال في التصميم الجديد
+    function joinOffers() {
+        // لا يوجد منطق هنا
+    }
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
-            });
+            }
         });
-    </script>
+    });
+</script>
