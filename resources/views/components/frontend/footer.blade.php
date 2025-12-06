@@ -39,11 +39,37 @@
         /* Footer Styles */
         .footer-section {
             position: relative;
-            background: #111;
+            background: #4D4541;
             color: #fff;
             margin-top: 0;
+
+            padding-top: 150px;
+            padding-bottom: 50px;
+            text-align: center;
+            direction: rtl;
+            overflow: hidden;
         }
 
+        .footer-background-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('{{ asset('images/footer-bg-spa.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+        .footer-background-layer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(43, 38, 36, 0.75);
+        }
         .footer-curve {
             position: absolute;
             top: 0;
@@ -54,7 +80,27 @@
             transform: translateY(-100%);
             z-index: 1;
         }
+        .footer-curve-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 5;
+            transform: translateY(-99%);
+        }
+        .footer-curve-top svg {
+            display: block;
+            width: 100%;
+            height: 150px;
+        }
 
+        .footer-curve-top .shape-fill {
+            /* لون الموجة يطابق لون الخلفية الرئيسية لـ body */
+            fill: #f5f5f5;
+        }
         .footer-curve svg {
             display: block;
             width: 100%;
@@ -62,19 +108,19 @@
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 80px 20px 20px;
+            padding: 0 20px;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 أعمدة ثابتة */
-    gap: 40px;
-    margin-bottom: 50px;
-}
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 أعمدة ثابتة */
+            gap: 40px;
+            margin-bottom: 50px;
+        }
 
 
         .footer-column {
@@ -153,30 +199,103 @@
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .social-icons a {
-            color: #fff;
-            font-size: 1.5rem;
+            color: #E8D3C4;
+            font-size: 1.1rem;
+            border: 1px solid #E8D3C4;
+            border-radius: 5px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
-            display: inline-block;
         }
 
-        .social-icons a:hover {
+        /* .social-icons a:hover {
             color: #d4af37;
             transform: scale(1.2);
-        }
+        } */
 
+
+        .social-icons a:hover {
+            background-color: #E8D3C4;
+            color: #4D4541;
+            transform: scale(1.1);
+        }
+       
         /* Logo */
         .footer-logo-container {
             text-align: center;
             margin: 50px 0 30px 0;
         }
 
-        .footer-logo {
+        /* .footer-logo {
             max-height: 150px;
             max-width: 300px;
+        } */
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #E8D3C4;
+            letter-spacing: 5px;
+            margin-bottom: 5px;
+        }
+        .footer-logo-exp {
+             font-family: 'Almarai', sans-serif;
+             font-size: 0.9rem;
+             color: #E8D3C4;
+             margin-bottom: 25px;
+             font-weight: 300;
+             letter-spacing: 2px;
+        }
+
+        .footer-description {
+            color: #E8D3C4;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            padding: 0 50px; /* تقليل عرض النص في المنتصف */
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            background-color: #6D6664;
+            color: #E8D3C4;
+            border: 1px solid #E8D3C4;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: #E8D3C4;
+            color: #4D4541;
+            border-color: #4D4541;
+            transform: translateY(-2px);
+        }
+
+        .contact-btn i {
+            margin-left: 10px;
+            font-size: 1rem;
         }
 
         /* Payment Icons */
@@ -212,16 +331,42 @@
         .payment-tabby { color: #3BDEAE; }
 
         /* Copyright */
+        
         .footer-copyright {
-            text-align: center;
-            color: #888;
-            font-size: 0.9rem;
-            padding: 20px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            border-top: 1px solid rgba(232, 211, 196, 0.2);
+            color: #E8D3C4;
+            font-size: 0.85rem;
         }
-
+        /* Responsive */
         /* Responsive */
         @media (max-width: 768px) {
+            .footer-section {
+                padding-top: 100px;
+            }
+            .footer-curve-top {
+                height: 100px;
+            }
+            .footer-curve-top svg {
+                height: 100px;
+            }
+            .footer-description {
+                padding: 0 15px;
+                font-size: 0.9rem;
+            }
+            .contact-buttons {
+                flex-direction: column;
+                gap: 10px;
+                max-width: 300px;
+                margin: 0 auto 30px auto;
+            }
+            .contact-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* @media (max-width: 768px) {
             .demo-content h1 {
                 font-size: 2rem;
             }
@@ -259,7 +404,7 @@
             .payment-card span {
                 font-size: 1rem;
             }
-        }
+        } */
     </style>
 
 
@@ -268,9 +413,9 @@
         <!-- Wave Curve -->
 <div class="footer-curve">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150" preserveAspectRatio="none">
-        <path fill="#111" fill-opacity="1" 
-              d="M0,150 
-                 C360,0 1080,0 1440,150 
+        <path fill="#111" fill-opacity="1"
+              d="M0,150
+                 C360,0 1080,0 1440,150
                  L1440,150 L0,150 Z"></path>
     </svg>
 </div>
@@ -334,14 +479,14 @@
             <!-- Join Us -->
             <div class="footer-column">
                 <h5>{{ __('messagess.Join Us For Latest Offers') }}</h5>
-                
+
                 <div class="subscription-form" style="justify-content: center;">
                     <div class="input-wrapper">
                         <input type="tel" class="subscription-input" placeholder="+966" id="phoneInput" dir="ltr">
                         <button class="join-btn" onclick="joinOffers()">{{ __('messagess.Join') }}</button>
                     </div>
                 </div>
-            
+
                 <button class="whatsapp-btn full-width" onclick="subscribeWhatsApp()">
                     <i class="bi bi-whatsapp"></i> {{ __('messagess.Quick WhatsApp Contact') }}
                 </button>
@@ -507,13 +652,13 @@
         function subscribeWhatsApp() {
             const phoneInput = document.getElementById('phoneInput');
             const phoneNumber = phoneInput.value.trim();
-            
+
             if (phoneNumber) {
                 // Replace with your actual WhatsApp business number
                 const whatsappNumber = '966555666777'; // Your WhatsApp number
                 const message = encodeURIComponent('أريد الاشتراك في العروض. رقم الهاتف: ' + phoneNumber);
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
-                
+
                 window.open(whatsappUrl, '_blank');
                 phoneInput.value = '';
             } else {
