@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
         Paginator::useBootstrap();
 
-        // ✅ تخصيص ديركتيفات Blade
         Blade::directive('hasPermission', function ($permissions) {
             return "<?php if(Auth::user()->can({$permissions})): ?>";
         });
@@ -44,44 +44,20 @@ class AppServiceProvider extends ServiceProvider
             return '<?php endif; ?>';
         });
 
-        // ✅ تخصيص تحميل الترجمة
         $this->app->singleton('translation.loader', function ($app) {
             return new CustomTranslationLoader($app['files'], $app['path.lang']);
         });
 
         $this->app->singleton('translator', function ($app) {
             $loader = $app['translation.loader'];
+
             $locale = $app['config']['app.locale'];
+
             $trans = new Translator($loader, $locale);
+
             $trans->setFallback($app['config']['app.fallback_locale']);
+
             return $trans;
         });
-
-        /*
-        |--------------------------------------------------------------------------
-        | ✅ توجيه مسار public إلى public_html
-        |--------------------------------------------------------------------------
-        | هذا يجعل كل عمليات الرفع والقراءة تتم من مجلد public_html بدل project/public
-        */
-        $realPublicPath = '/home/city2tec/public_html';
-
-        // إعادة تعريف public_path()
-        app()->bind('path.public', function() use ($realPublicPath) {
-            return $realPublicPath;
-        });
-
-        // تعديل إعدادات disk "public" في Laravel
-        config([
-            'filesystems.disks.public.root' => $realPublicPath,
-            'filesystems.disks.public.url'  => env('APP_URL') . '/storage',
-            'filesystems.links' => [
-                public_path('storage') => storage_path('app/public'),
-            ],
-        ]);
-
-        // فرض https في الإنتاج (اختياري)
-        if (config('app.env') === 'production') {
-            URL::forceScheme('https');
-        }
     }
 }

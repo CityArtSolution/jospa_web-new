@@ -145,4 +145,4 @@
     <div class="sidebar-footer"></div>
 </div>
 <?php endif; ?>
-<?php /**PATH /home/city2tec/project/resources/views/backend/includes/sidebar.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/backend/includes/sidebar.blade.php ENDPATH**/ ?>

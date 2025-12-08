@@ -36,13 +36,12 @@ return [
             'throw' => false,
         ],
 
-       'public' => [
-    'driver' => 'local',
-    'root' => '/home/city2tec/public_html',
-    'url' => env('APP_URL') . '/uploads',
-    'visibility' => 'public',
-],
-
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads'),
+            'url' => env('APP_URL') . '/storage/uploads',
+            'visibility' => 'public',
+        ],
 
 
         's3' => [

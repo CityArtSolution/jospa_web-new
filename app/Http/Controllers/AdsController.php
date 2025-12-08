@@ -7,14 +7,15 @@ use App\Models\Ad;
 
 class AdsController extends Controller
 {
-    public function index(){        
-        return view('backend.Ads.index_datatable');
+    public function index(){   
+        $ads = Ad::all();     
+        return view('backend.Ads.index_datatable' , compact('ads'));
     }
     public function store(Request $request){
         $request->validate([
-            'shop_bannar'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'serve_bannar'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'pack_bannar'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'page'  => 'required',
+            'status'  => 'required',
+            'image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $last_ad = Ad::latest()->first();

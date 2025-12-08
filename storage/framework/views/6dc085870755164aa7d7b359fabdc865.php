@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?> <?php echo e('Dashboard'); ?> <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -412,4 +414,4 @@
 
 <?php $__env->stopPush(); ?>
 
-<?php echo $__env->make('backend.layouts.app', ['isBanner' => false], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/city2tec/project/resources/views/backend/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('backend.layouts.app', ['isBanner' => false], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/backend/index.blade.php ENDPATH**/ ?>

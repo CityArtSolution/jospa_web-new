@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
-            $table->string('shop_bannar')->nullable();
-            $table->string('serve_bannar')->nullable();
-            $table->string('pack_bannar')->nullable();
+            $table->string('page')->nullable();
+            $table->boolean('status')->default(true);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -11,4 +11,4 @@ $google_analytics = setting('google_analytics');
     gtag('config', '<?php echo e($google_analytics); ?>');
 </script>
 <?php endif; ?>
-<?php /**PATH /home/city2tec/project/resources/views/components/google-analytics.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/components/google-analytics.blade.php ENDPATH**/ ?>

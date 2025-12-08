@@ -9,8 +9,8 @@ class Ad extends Model
 {
     use HasFactory;
     protected $filable = [
-        'shop_bannar',
-        'serve_bannar',
-        'pack_bannar',
+        'page',
+        'status',
+        'image',
         ];
 }
