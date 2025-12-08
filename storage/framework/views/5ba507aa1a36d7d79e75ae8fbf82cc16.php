@@ -150,11 +150,13 @@
     /* Responsive */
     @media (max-width: 768px) {
         .hero-container {
-            flex-direction: column;
+            flex-direction: column-reverse;
             text-align: center;
+            margin-top: 35px;
         }
         .second-sec {
             height: 250px;
+            width: 100%;
         }
         .first-sec h1 {
             font-size: 2rem;
@@ -167,7 +169,7 @@
             <h1><?php echo e(__('messagess.slogan')); ?></h1>
             <p><?php echo e(__('messagess.about_us')); ?></p>
             <div class="buttons">
-                <a href="bookNaw" class="btn btn-primary"><span class="iconify" data-icon="uil:calender" data-width="30" data-height="30"></span> <?php echo e(__('messagess.book_now')); ?></a>
+                <a href="#bookNaw" class="btn btn-primary"><span class="iconify" data-icon="uil:calender" data-width="30" data-height="30"></span> <?php echo e(__('messagess.book_now')); ?></a>
                 <a href="<?php echo e(route('gift.page')); ?>" class="btn btn-outline-light"><span class="iconify" data-icon="basil:present-outline" data-width="32" data-height="32"></span> <?php echo e(__('messagess.choose_your_gift')); ?></a>
             </div>
         </div>

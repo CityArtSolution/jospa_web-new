@@ -11,6 +11,7 @@ class AdsController extends Controller
         $ads = Ad::all();     
         return view('backend.Ads.index_datatable' , compact('ads'));
     }
+    
     public function store(Request $request){
         $request->validate([
             'page'  => 'required',

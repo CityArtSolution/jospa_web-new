@@ -2,6 +2,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
 <style>
+    
+    .hamburger {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    }
+
+    .hamburger span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: #000;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    }
+
+    /* تأثير التحويل عند الضغط */
+    .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+    opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+    }
     .m-nav{
         width: 100%;
         height: 17vh;
@@ -126,7 +155,7 @@
     }
     .mob-nav{
         text-align: right;
-        background: #212121;
+        background: #BF9456;
         min-height: 45px;
         display: flex;
         direction: rtl;
@@ -328,10 +357,14 @@
     <!-- زرار فتح المينيو -->
     <div class="mob-nav">
         <button class="btn mob-btn d-lg-none" style="margin-top: 12px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-          <img src="{{asset('images/icons/hugeicons_menu-02.png')}}">
+            <div class="hamburger" onclick="this.classList.toggle('active')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </button>
 
-        <a href="/" style="display: flex;align-items: center;"> <img style="width: 37px;" src="{{asset('images/samilogo.png')}}"></a>
+        <a href="/" style="display: flex;align-items: center;width: 124px;"> <img style="width: 118px;" src="{{asset('images/jospalogo.png')}}"></a>
 
         <div class="loyalty" style="width: 61% !important;height: 100%;margin: 11px;display: flex;justify-content: left;align-items: center;">
             <a href="{{route('home.loyalety')}}" class="more-btn-nav">

@@ -47,6 +47,14 @@
     margin-left: 10px;
     border-radius: 5px;
   }
+  @media (max-width: 768px) {
+    .f-sec, .s-sec {
+        width: 100%;
+    }
+    .s-sec {
+        margin-top: 21px; 
+    }
+}
   .f-sec h3, .s-sec h3{
     font-weight: 700;
     color: white;
@@ -62,7 +70,7 @@
     <h2><?php echo e(__('messagess.spa_atmosphere')); ?></h2>
     <p><?php echo e(__('messagess.spa_experience')); ?></p>
   </div>
-  <div class="d-flex" style="justify-content: center;">
+  <div class="d-flex flex-column flex-md-row justify-content-center" style="justify-content: center;">
     <div class="f-sec">
       <h3><?php echo e(__('messagess.vision_title')); ?></h3>
       <p><?php echo e(__('messagess.vision_text')); ?></p>

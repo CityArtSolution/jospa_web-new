@@ -76,7 +76,7 @@ class FrontendController extends Controller
 
     public function Packages()
 {
-    $ad = Ad::select('pack_bannar')->latest()->first();
+    $ad = Ad::where('page' , 'Packages')->get();
 
     $packages = Package::with([
         'service',
@@ -113,7 +113,7 @@ class FrontendController extends Controller
      */
     public function services()
     {
-        $ad = Ad::select('serve_bannar')->latest()->first();
+        $ad = Ad::where('page' , 'servises')->get();
          // Fetch active services for the homepage
          $services = Service::with(['category', 'media'])
          ->where('status', 1)
@@ -144,7 +144,7 @@ class FrontendController extends Controller
      */
     public function shop()
     {
-        $ad = Ad::select('shop_bannar')->latest()->first();
+        $ad = Ad::where('page' , 'shop')->get();
 
             // Fetch active products for the homepage
     $categories = ProductCategory::with(['products' => function ($q) {

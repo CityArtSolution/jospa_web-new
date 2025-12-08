@@ -1,6 +1,10 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <section class="py-5">
-
+<style>
+  .row {
+    --bs-gutter-x: 1rem !important;
+  }
+</style>
     <div class="container" style="padding: 0 5rem;">
 
         <h2 class="mb-5 text-center" style="font-size: 42px;background: linear-gradient(90deg, #CF9233, #212121);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size: 2.5rem; font-weight: bold;">

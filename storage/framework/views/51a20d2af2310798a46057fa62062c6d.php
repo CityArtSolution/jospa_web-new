@@ -36,7 +36,7 @@
         <h4 class="mt-3 Category_Name"><?php echo e($name ?? 'Category Name'); ?></h4>
         <p class="text-muted Category_desc">
             <?php if(isset($description)): ?>
-                <?php echo e($description[app()->getLocale()]); ?>
+                <?php echo e(\Illuminate\Support\Str::limit($description[app()->getLocale()] ?? '', 200)); ?>
 
             <?php endif; ?>
         </p>
@@ -48,6 +48,6 @@
             <a href="#" class="btn btn-outline-light" style="width: 100%;background:#BF9456;"><?php echo e(__('messagess.details')); ?></a>
         <?php endif; ?>
             <br>
-        <a href="#" class="btn btn-outline-light" style="width: 100%;margin-top:10px"><?php echo e(__('messagess.bookNow')); ?></a>
+        <a href="<?php echo e(route('salon.create')); ?>" class="btn btn-outline-light" style="width: 100%;margin-top:10px"><?php echo e(__('messagess.bookNow')); ?></a>
     </div>
 </div><?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/components/frontend/category-card.blade.php ENDPATH**/ ?>

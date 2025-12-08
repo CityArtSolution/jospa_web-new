@@ -36,7 +36,7 @@
         <h4 class="mt-3 Category_Name">{{ $name ?? 'Category Name' }}</h4>
         <p class="text-muted Category_desc">
             @if(isset($description))
-                {{ $description[app()->getLocale()] }}
+                {{ \Illuminate\Support\Str::limit($description[app()->getLocale()] ?? '', 200) }}
             @endif
         </p>
     </div>
@@ -47,6 +47,6 @@
             <a href="#" class="btn btn-outline-light" style="width: 100%;background:#BF9456;">{{ __('messagess.details') }}</a>
         @endif
             <br>
-        <a href="#" class="btn btn-outline-light" style="width: 100%;margin-top:10px">{{ __('messagess.bookNow') }}</a>
+        <a href="{{route('salon.create')}}" class="btn btn-outline-light" style="width: 100%;margin-top:10px">{{ __('messagess.bookNow') }}</a>
     </div>
 </div>
