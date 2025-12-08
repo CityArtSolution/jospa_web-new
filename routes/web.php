@@ -100,8 +100,6 @@ Route::get('/test-upload', function () {
 
     Route::post('/signin/verify', [SignController::class, 'verify'])->name('signin.verify');
 
-    Route::get('/giffte' , [GiftCardController::class, 'index'])->name('gift.page');
-
     // Import
 
     Route::post('/import-services', [ServiceController::class, 'import'])->name('import.services');// uploude <= موقت هنا
@@ -133,7 +131,8 @@ Route::get('/test-upload', function () {
     Route::get('/success-py-gift', [GiftCardController::class, 'handlePaymentResult']);
     Route::get('/success-py-invoice', [BookingCartController::class, 'handlePaymentResult']);
 
-    // ADS page
+    Route::get('/giffte' , [GiftCardController::class, 'index'])->name('gift.page');
+
     Route::get('/ads', function () {return view('components.frontend.ads');})->name('ads.page');
 
     Route::get('/cart', [BookingCartController::class, 'index'])->name('cart.page');

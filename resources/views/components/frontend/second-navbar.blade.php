@@ -1,15 +1,15 @@
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
-    <style>
-    body {
-      font-family: 'Almarai', sans-serif !important;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
     .m-nav{
         width: 100%;
         height: 17vh;
-        background: #212121;
+        background: #BF9456;
         position: fixed;
         z-index: 9999;
         display: flex;
+        align-items: baseline;
     }
     .loyalty{
         width: 18%;
@@ -31,7 +31,7 @@
         width: 53%;
         height: 100%;
         display: flex;
-        font-family: Almarai;
+        font-family: 'Zain', sans-serif;
     }
     .logo{
         width: 11%;
@@ -40,14 +40,14 @@
         justify-content: center;
     }
     .logo img{
-        height: 77px;
+        height: 75px;
         margin-top: 6px;
     }
     .more-btn-nav{
         margin-top: 0;
         width: 71%;
         height: 55px;
-        background-color: #212121;
+        background-color: white;
         border-radius: 28px;
         display: flex;
         text-decoration-line: none;
@@ -84,45 +84,38 @@
         margin-top: 12px;
     }
 .icon-circle {
-  width: 48px;
-  height: 48px;
-  border: 2px solid #cf9233;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 6px auto;
-  font-size: 20px;   /* حجم الأيقونة */
-  color: #cf9233;
-  transition: all 0.3s ease;
+    background: white;
+    width: 48px;
+    height: 48px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 6px auto;
+    font-size: 20px;   /* حجم الأيقونة */
+    color: #cf9233;
+    transition: all 0.3s ease;
 }
 
 .icon-text {
   text-align: center;
   font-size: 13px;
   font-weight: 500;
-  color: #cf9233;
+  color: white;
 }
-
-
-    .icon-text {
-      text-align: center;
-      font-size: 16px;
-      font-weight: 500;
-      color: #cf9233;
-    }
     .icon-circle:hover  {
         animation: flashBlur 1s infinite;
     }
     @keyframes flashBlur {
     0% {
-        box-shadow: 0 0 0px #cf9233;
+        box-shadow: 0 0 0px white;
     }
     50% {
-        box-shadow: 0 0 10px 3px #cf9233; /* درجة البلور */
+        box-shadow: 0 0 10px 3px white; /* درجة البلور */
     }
     100% {
-        box-shadow: 0 0 0px #cf9233;
+        box-shadow: 0 0 0px white;
     }
 }
     a {
@@ -142,10 +135,90 @@
         color:#979797;
         width: 65% !important;
     }
+
+  .language-selector {
+    position: relative;
+  }
+
+    .dropbtn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 25px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #bf9456;
+        background: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        width: 75px;
+    }
+
+    .dropbtn::after {
+        content: '▼';
+        margin-left: 10px;
+        font-size: 12px;
+        transition: transform 0.3s ease;
+    }
+
+    .dropbtn:hover {
+        box-shadow: 0 12px 35px white;
+    }
+
+  /* قائمة المنسدلة */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background: #302a29;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        min-width: 200px;
+        overflow: hidden;
+        z-index: 100;
+        animation: dropdownShow 0.4s ease forwards;
+    }
+
+  .dropdown-content a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-content img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .dropdown-content a:hover {
+    background: #bf9456;
+  }
+
+  .language-selector:hover .dropdown-content {
+    display: block;
+  }
+
+  @keyframes dropdownShow {
+    0% { opacity: 0; transform: translateY(-15px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 </style>
 
     <div class="m-nav d-none d-lg-flex">
-        <div class="logo"><a href="/"> <img src="{{asset('images/samilogo.png')}}"></a></div>
+        <div class="logo"><a href="/"> <img src="{{asset('images/jospalogo.png')}}"></a></div>
         <div class="links">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center gap-4" style="margin-right: 22px;flex-direction: row;white-space: nowrap;z-index: 999999;">
 
@@ -213,8 +286,13 @@
                     </li>
 
                     <li  class="nav-item h5">
-                        <a href="{{ route('language.switch', 'en') }}" style="color:#cf9233;text-decoration-line: none;">English</a> |
-                        <a href="{{ route('language.switch', 'ar') }}" style="color:#cf9233;text-decoration-line: none;">العربية</a>
+                        <div class="language-selector">
+                        <button class="dropbtn">اللغة</button>
+                        <div class="dropdown-content">
+                            <a href="{{ route('language.switch', 'ar') }}"><img src="https://flagcdn.com/sa.svg" alt="AR">العربية  </a>
+                            <a href="{{ route('language.switch', 'en') }}"><img src="https://flagcdn.com/gb.svg" alt="EN"> English</a>
+                        </div>
+                        </div>
                     </li>
                 </ul>
         </div>

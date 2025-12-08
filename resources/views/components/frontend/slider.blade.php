@@ -31,7 +31,7 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
   text-align: center;
-  font-family: 'Almarai', sans-serif;
+  font-family: 'Zain', sans-serif !important;
   border: 2px solid transparent;
   background-clip: padding-box;
   transition: 0.3s;
@@ -92,7 +92,7 @@
     margin-top: 0;
     width: 50%;
     height: 55px;
-    background-color: #CF9233;
+    background-color: #BF9456;
     border-radius: 28px;
     display: flex;
     justify-content: center;
@@ -113,11 +113,10 @@
 
     {{ $slot }}
 <div class="main-head">
-    <h2 class="mb-5 mt-3 text-center" style="position: relative;z-index: 1;font-size: 42px;color:white;font-weight: bold;">
+    <h2 class="mb-5 mt-3 text-center" style="position: relative;z-index: 1;font-size: 42px;color:#BF9456;font-weight: bold;">
         {{ __('messagess.our_branches') }}
     </h2>
 
-    <img src="{{ asset('images/frontend/Rectangle 17.png') }}" alt="Gift Background" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; min-height: 120%">
         <div class="position-relative row justify-content-center g-4" style="margin-top: 60px;">
             @foreach($branches as $branch)
                 <div class="col-12 col-md-3" style="display: flex;justify-content: center;">

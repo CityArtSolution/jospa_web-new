@@ -46,8 +46,6 @@
     <div class="position-relative" style="height: 17vh;">
         @include('components.frontend.second-navbar')
     </div>
-    <div class="position-relative br-15"></div>
-    <!-- Page Content -->
     <main>
         @include('components.frontend.learn-about-section')
     </main>

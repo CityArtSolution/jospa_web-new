@@ -16,15 +16,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     @stack('after-styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
-   <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
         .form-label {
             margin-bottom: 1.5rem;
             color: #979797;
         }
         body {
-          font-family: 'Almarai', sans-serif !important;
-          background: #F8F8F8;
+          font-family: 'Zain', sans-serif;
+          background: #F9F6F0;
         }
         .profile-card {
           background: #fff;
@@ -103,13 +105,14 @@
           padding: 20px;
         }
         .stats-box {
+            background: #FFFFFF;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
-            padding: 10px;
+            padding: 43px;
             gap: 22px;
             flex-wrap: wrap;
-            width: 74%;
+            width: 86%;
             margin: auto;
         }
         .stats-box a{
@@ -119,7 +122,7 @@
           flex: 1;
           min-width: 150px;
           text-align: center;
-          background: #FFFFFF;
+          background: #F9F6F0;
           border-radius: 6px;
           padding: 10px;
         }
@@ -128,13 +131,13 @@
           margin-bottom: 8px;
         }
         .stat-value {
-          color: orange;
+          color: #BF9456;
           font-weight: bold;
           font-size: 18px;
         }
         .stat-unit {
             font-size: 13px;
-            color: #CF9233;
+            color: #BF9456;
             margin: 8px;
         }
         .stat-icon {
@@ -147,12 +150,12 @@
             color: #979797;
         }
         .form-control[readonly] {
-            background-color: #F8F8F8;
+            background-color: #F9F6F0;
         }
         .table-head {
             display: flex;
             justify-content: space-around;
-            background: #CF9233;
+            background: #BF9456;
             font-weight: bold;
             color: white;
             padding: 9px;
@@ -232,7 +235,7 @@
             </div>
             <!-- زر تعديل البيانات -->
             <div class="col-md-1" style="height: 61vh;display: flex;justify-content: space-between;align-items: flex-end;flex-direction: column;">
-                <a href="#" class="" style=" z-index: 2; padding: 6px 8px; border-radius: 50%;" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                <a href="#" class="" style="color: #BF9456;z-index: 2; padding: 6px 8px; border-radius: 50%;" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                     <i class="fas fa-edit"></i>
                 </a>
 
@@ -246,7 +249,7 @@
     </div>
     <div class="text-center mb-4">
         <a href="{{ route('frontend.become.affiliate') }}"
-        style="color: #CF9233;
+        style="color: #BF9456;
                 font-weight: 600;
                 text-decoration: none;
                 font-size: 16px;">
@@ -318,7 +321,7 @@
     <!-- القسم الأيسر (جدول المعاملات) -->
     <div class="col-lg-8 mb-4">
       <div class="rounded p-3" style="background: white;">
-        <h5 style="padding: 10px;color: #CF9233;font-weight: bold;font-size: 21px;" class="text-center mb-3">{{ __('profile.my_transactions') }}</h5>
+        <h5 style="padding: 10px;color: #BF9456;font-weight: bold;font-size: 21px;" class="text-center mb-3">{{ __('profile.my_transactions') }}</h5>
         <div class="table-head">
             <h5>{{ __('profile.service') }}</h5>
             <h5>{{ __('profile.service_location') }}</h5>
@@ -354,16 +357,16 @@
         <h6 class="mb-5" style="font-weight: bold;">{{ __('messages.payment_methods') }}</h6>
         <div class="row g-3 text-center">
           <div class="col-6">
-            <img src="{{asset('images/icons/visa.png')}}" alt="Visa" class="img-fluid  rounded p-3" style="background: #f5f5f5;">
+            <img src="{{asset('images/icons/visa.png')}}" alt="Visa" class="img-fluid  rounded p-3" style="background: #F9F6F0;">
           </div>
           <div class="col-6">
-            <img src="{{asset('images/icons/mada.png')}}" alt="Mada" class="img-fluid  rounded p-3" style="background: #f5f5f5;">
+            <img src="{{asset('images/icons/mada.png')}}" alt="Mada" class="img-fluid  rounded p-3" style="background: #F9F6F0;">
           </div>
           <div class="col-6">
-            <img src="{{asset('images/icons/tamara.png')}}" alt="تمارا" class="img-fluid border rounded p-3" style="background: #f5f5f5;">
+            <img src="{{asset('images/icons/tamara.png')}}" alt="تمارا" class="img-fluid border rounded p-3" style="background: #F9F6F0;">
           </div>
           <div class="col-6">
-            <img src="{{asset('images/icons/tabby.png')}}" alt="tabby" class="img-fluid  rounded p-3" style="background: #f5f5f5;">
+            <img src="{{asset('images/icons/tabby.png')}}" alt="tabby" class="img-fluid  rounded p-3" style="background: #F9F6F0;">
           </div>
         </div>
       </div>

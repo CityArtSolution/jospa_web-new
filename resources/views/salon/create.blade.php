@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('messagess.booking_system') }}</title>
-    <link href="https://fonts.cdnfonts.com/css/lama-sans" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/backend.css') }}">
     @if (language_direction() == 'rtl')
         <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
@@ -14,6 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
@@ -27,6 +27,7 @@
         body {
             background-color: white;
             color: #333;
+            font-family: 'Zain', sans-serif;
         }
         
         /* Main Container */
@@ -40,7 +41,7 @@
         /* Content Area */
         .content {
             flex: 1;
-            background: #F8F8F8;
+            background: #F9F6F0;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -77,20 +78,20 @@
         }
 
         .progress-step.active {
-            background: #CF9233;
+            background: #BF9456;
             /* Green for active step */
             color: white;
         }
 
         .progress-step.completed {
-            background: #CF9233;
+            background: #BF9456;
             /* Green for completed step */
             color: white;
         }
 
         /* Optional: Hover effect for clickable steps */
         .progress-step:hover:not(.active):not(.completed) {
-            background: #cf923329;
+            background: #BF945629;
         }
 
         /* Disable hover and cursor for future steps */
@@ -164,7 +165,7 @@
         }
 
         .service-card.selected {
-            border: 4px solid #cf9233;
+            border: 4px solid #BF9456;
         }
 
         .service-card h4 {
@@ -174,7 +175,7 @@
         }
 
         .service-card:hover {
-            border: 4px solid #cf9233;
+            border: 4px solid #BF9456;
             transform: translateY(-5px);
         }
         .service-icon {
@@ -380,12 +381,12 @@
         }
 
         .btn-primary {
-            background: #CF9233;
+            background: #BF9456;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #CF9233;
+            background: #BF9456;
         }
 
         .btn-secondary {
@@ -480,7 +481,7 @@
         .massage-name {
             font-size: 18px;
             font-weight: bold;
-            color: #CF9233;
+            color: #BF9456;
             margin-bottom: 10px;
         }
 
@@ -659,9 +660,10 @@
             height: fit-content;
             background: white;
             border-radius: 14px;
+            padding: 20px;
         }
          .selected-card{
-        border:2px solid #CF9233;
+        border:2px solid #BF9456;
         }
         .calendar {
             width: 400px;
@@ -685,7 +687,7 @@
         }
 
         .calendar-title {
-          color: #cf9233;
+          color: #BF9456;
           font-weight: bold;
         }
     
@@ -708,7 +710,7 @@
         }
         
         .calendar-day.selected {
-            background: #cf9233;
+            background: #BF9456;
             color:white;
             font-weight: bold;
         }
@@ -766,7 +768,7 @@
         }
         #wifi-loader {
           --background: #62abff;
-          --front-color: #cf9233;
+          --front-color: #BF9456;
           --back-color: #c3c8de;
           --text-color: #414856;
           width: 64px;
@@ -1022,7 +1024,7 @@
             color: #979797;
         }
         .sub-sammary-total{
-            color: #CF9233;
+            color: #BF9456;
         }
         .two-btn{
             display: flex;
@@ -1066,7 +1068,7 @@
         }
         
         .branch-name {
-          color: #CF9233;
+          color: #BF9456;
           font-weight: bold;
           margin-bottom: 5px;
           font-size: 18px;
@@ -1088,7 +1090,7 @@
                 grid-template-columns: repeat(1, minmax(250px, 1fr)) !important;
             }
             .summary-card {
-                border: 1px solid #CF9233;
+                border: 1px solid #BF9456;
             }
             .sub-label {
                 display: none;
@@ -1886,7 +1888,7 @@
                         service.subServices.forEach(sub => {
                             const card = document.createElement('div');
                             card.className = 'summary-card';
-                            card.style.cssText = `border-radius:10px;padding:20px;background:#fff;cursor:pointer;transition:0.2s ease-in-out;
+                            card.style.cssText = `border-radius:10px;padding:20px;background:rgb(249, 246, 240);cursor:pointer;transition:0.2s ease-in-out;
                             `;
                             
                             card.onmouseenter = () => card.style.boxShadow = "0 4px 10px rgba(0,0,0,0.1)";

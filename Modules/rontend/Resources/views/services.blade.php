@@ -28,9 +28,11 @@
 
         @include('components.frontend.second-navbar')
     </div>
-    <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-top: 37px;">
-    <img style="width: 75%;" src="{{$ad['serve_bannar']}}">
-    </div>
+    @if (isset($ad['serve_bannar']))
+        <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-top: 37px;">
+            <img style="width: 75%;" src="{{$ad['serve_bannar']}}">
+        </div>
+    @endif
     <!-- Page Content -->
     <main>
         @include('components.frontend.services-section', compact('categories', 'services', 'packages'))

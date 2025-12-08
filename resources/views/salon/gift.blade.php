@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('messagess.booking_system') }}</title>
-    <link href="https://fonts.cdnfonts.com/css/lama-sans" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/backend.css') }}">
     @if (language_direction() == 'rtl')
         <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
@@ -13,7 +12,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
@@ -25,6 +26,7 @@
         }
 
         body {
+            font-family: 'Zain', sans-serif !important;
             background-color: white;
             color: #333;
         }
@@ -78,20 +80,20 @@
         }
 
         .progress-step.active {
-            background: #CF9233;
+            background: #BF9456;
             /* Green for active step */
             color: white;
         }
 
         .progress-step.completed {
-            background: #CF9233;
+            background: #BF9456;
             /* Green for completed step */
             color: white;
         }
 
         /* Optional: Hover effect for clickable steps */
         .progress-step:hover:not(.active):not(.completed) {
-            background: #cf923329;
+            background: #BF945629;
         }
 
         /* Disable hover and cursor for future steps */
@@ -117,7 +119,7 @@
         }
 
         .service-card.selected {
-            border: 4px solid #cf9233;
+            border: 4px solid #BF9456;
         }
 
         .service-card h4 {
@@ -127,7 +129,7 @@
         }
 
         .service-card:hover {
-            border: 4px solid #cf9233;
+            border: 4px solid #BF9456;
             transform: translateY(-5px);
         }
         .service-icon {
@@ -205,13 +207,13 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #555;
+            color: white;
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select {    
             width: 38%;
-            font-family: 'Lemonada', sans-serif;
+            font-family: 'Zain', sans-serif;
             padding: 8px;
             border: 2px solid #ddd;
             border-radius: 8px;
@@ -223,7 +225,7 @@
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #CF9233;
+            border-color: #BF9456;
         }
 
         /* Navigation Buttons */
@@ -245,12 +247,12 @@
         }
 
         .btn-primary {
-            background: #CF9233;
+            background: #BF9456;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #CF9233;
+            background: #BF9456;
         }
 
         .btn-secondary {
@@ -336,7 +338,7 @@
         .massage-name {
             font-size: 18px;
             font-weight: bold;
-            color: #CF9233;
+            color: #BF9456;
             margin-bottom: 10px;
         }
 
@@ -450,9 +452,9 @@
             font-weight: bold;
             font-size: 21px;
             display: block;
-            color: black;
+            color: white;
             text-align: center;
-            background: white;
+            background: #BF9456;
             padding: 12px;
             box-shadow: gray 0px 1px 9px;
         }
@@ -460,13 +462,13 @@
             width: 100%;
             height: fit-content;
             background: white;
-            color:#CF9233;
+            color:#BF9456;
             gap: 30px;
             padding: 35px;
             border-radius: 14px;
         }
          .selected-card{
-        border:2px solid #CF9233;
+        border:2px solid #BF9456;
         }
 
     
@@ -486,7 +488,7 @@
         }
         #wifi-loader {
           --background: #62abff;
-          --front-color: #cf9233;
+          --front-color: #BF9456;
           --back-color: #c3c8de;
           --text-color: #414856;
           width: 64px;
@@ -742,7 +744,7 @@
             color: #979797;
         }
         .sub-sammary-total{
-            color: #CF9233;
+            color: #BF9456;
         }
         .two-btn{
             display: flex;
@@ -786,7 +788,7 @@
         }
         
         .branch-name {
-          color: #CF9233;
+          color: #BF9456;
           font-weight: bold;
           margin-bottom: 5px;
           font-size: 18px;
@@ -807,7 +809,7 @@
             border: none;
         }
         .form-textarea::placeholder {
-          color: #CF9233;
+          color: #BF9456;
         }
         @media (max-width: 576px) {
             .w-100-mob {
@@ -823,7 +825,7 @@
                 background: #212121;
             }
             .summary-card {
-                border: 1px solid #CF9233;
+                border: 1px solid #BF9456;
             }
             .content-form {
                 width: 100%;
@@ -1502,9 +1504,9 @@
                                     
                                     <div style="display:flex; flex-direction:row-reverse; justify-content:flex-end; gap:6px;">
                                         <input type="date" value="${sub.date || ''}" disabled 
-                                               style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;color: #CF9233;">
+                                               style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;color: #BF9456;">
                                         <input type="time"  value="${sub.time || ''}" disabled 
-                                               style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;color: #CF9233;">
+                                               style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;color: #BF9456;">
                                     </div>
         
                                     <div style="text-align:right; font-weight:bold; color:#a36b2c; margin-top:8px;">

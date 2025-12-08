@@ -149,17 +149,21 @@ class BranchSeeder extends Seeder
             }
         }
     }
-
-    private function attachFeatureImage($model, $publicPath)
-    {
-        if (! env('IS_DUMMY_DATA_IMAGE')) {
-            return false;
-        }
-
-        $file = new \Illuminate\Http\File($publicPath);
-
-        $media = $model->addMedia($file)->preservingOriginal()->toMediaCollection('feature_image');
-
-        return $media;
+private function attachFeatureImage($model, $publicPath)
+{
+    if (! env('IS_DUMMY_DATA_IMAGE')) {
+        return false;
     }
+
+    if (!file_exists($publicPath)) {
+        return false; // يتجاهل الصور الغير موجودة
+    }
+
+    $file = new \Illuminate\Http\File($publicPath);
+
+    $media = $model->addMedia($file)->preservingOriginal()->toMediaCollection('feature_image');
+
+    return $media;
+}
+
 }

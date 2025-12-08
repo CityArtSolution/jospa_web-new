@@ -12,21 +12,19 @@
     padding:0 20px 40px 20px;
     direction:{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};
     text-align:{{ app()->getLocale() == 'ar' ? 'right' : 'left' }};
-    font-family:'Almarai',sans-serif !important;
-    font-style:italic !important;
+    font-family: 'Zain', sans-serif important;
     background-color:#f9f9f9;
     margin:0;
-    padding-top:200px;
+    padding-top:100px;
     padding-bottom:40px;
 
 ">
     <div style="
-        background:#fff;
+        background:#F9F6F0;
         border-radius:12px;
         padding:40px 30px;
         width:100%;
         max-width:420px;
-        box-shadow:0 6px 18px rgba(0,0,0,0.1);
         position:relative;
         z-index:10;
     ">
@@ -85,21 +83,22 @@
             </div>
 
             <!-- Submit -->
-            <div style="margin-top:15px;">
+            <div style="margin-top:15px;display: flex;">
                 <button type="submit" style="
-                    background:linear-gradient(135deg,#ffcc00,#ff9900);
+                    background:#BF9456;
                     color:#fff !important;
                     font-weight:bold;
                     border:none;
-                    border-radius:8px;
+                    border-radius:36px;
                     padding:12px 20px;
-                    width:100%;
+                    width:50%;
+                    margin: auto;
                     cursor:pointer;
                     transition:background 0.3s ease,transform 0.2s ease;
                     display:inline-block;
                     text-align:center;
-                " onmouseover="this.style.background='linear-gradient(135deg,#ffdb4d,#ff751a)';this.style.transform='translateY(-2px)';"
-                   onmouseout="this.style.background='linear-gradient(135deg,#ffcc00,#ff9900)';this.style.transform='none';">
+                " onmouseover="this.style.transform='translateY(-2px)';"
+                   onmouseout="this.style.transform='none';">
                     {{ __('auth.login_button') }}
                 </button>
             </div>
@@ -107,8 +106,7 @@
 
         <p style="text-align:center;margin-top:20px;">
             {{ __('auth.no_account') }}
-            <a href="{{ route('signup') }}" style="color:#ff9900;font-weight:500;text-decoration:none;"
-               onmouseover="this.style.color='#cc7a00';" onmouseout="this.style.color='#ff9900';">{{ __('auth.signup') }}</a>
+            <a href="{{ route('signup') }}" style="color:#BF9456;font-weight:500;text-decoration:none;">{{ __('auth.signup') }}</a>
         </p>
     </div>
 </div>

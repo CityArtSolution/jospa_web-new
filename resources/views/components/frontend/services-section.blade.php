@@ -5,22 +5,23 @@
         margin-top: 100px;
     }
 }
+.row {
+    --bs-gutter-x: 0rem;
+}
 </style>
 <section class="py-5">
     <div class="container" id="bookNaw"  style="padding: 0 5rem;">
         <h2 class="mb-5 mt-3 text-center" style="font-size: 42px;background: linear-gradient(90deg, #CF9233, #212121);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: bold;">
             {{ __('messagess.our_service_categories') }}
         </h2>
-
-
-
         @if(isset($categories) && $categories->count() > 0)
-            <div class="row g-4 s-s-mt-100">
+            <div class="row s-s-mt-100">
                 @foreach($categories as $index => $category)
                     <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         @include('components.frontend.category-card', [
                             'image' => $category->av2,
                             'name' => $category->name,
+                            'description' => $category->description,
                             'price_range' => $category->services && $category->services->count() > 0 && $category->services->whereNotNull('default_price')->count() > 0 ?
                                 'SR ' . number_format($category->services->whereNotNull('default_price')->min('default_price'), 2) . ' - SR ' . number_format($category->services->whereNotNull('default_price')->max('default_price'), 2) :
                                 __('messagess.contact_for_pricing'),
@@ -36,28 +37,6 @@
         @endif
     </div>
 </section>
-
-<!-- Pricing Modal -->
-<div class="modal fade" id="pricingModal" tabindex="-1" aria-labelledby="pricingModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pricingModalLabel">{{ __('messagess.category_services_pricing') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('messagess.close') }}"></button>
-            </div>
-            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-                <div id="pricingTable">
-                    <div class="text-center">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">{{ __('messagess.loading_services') }}</span>
-                        </div>
-                        <p class="mt-2">{{ __('messagess.loading_services') }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Service Details Modal -->
 <div class="modal fade" id="serviceDetailsModal" tabindex="-1" aria-labelledby="serviceDetailsModalLabel" aria-hidden="true">

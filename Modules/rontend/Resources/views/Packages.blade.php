@@ -35,9 +35,11 @@
         @include('components.frontend.second-navbar')
     </div>
     
-    <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-top: 37px;">
-    <img style="width: 75%;" src="{{$ad['pack_bannar']}}">
-    </div>
+    @if(isset($ad['pack_bannar']))
+        <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-top: 37px;">
+            <img style="width: 75%;" src="{{$ad['pack_bannar']}}">
+        </div>
+    @endif
     
     <main style="margin-bottom: 40px;">
         @include('components.frontend.premium-packages-section', compact('packages'))

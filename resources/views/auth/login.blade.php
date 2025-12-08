@@ -12,7 +12,7 @@
     padding:0 20px 40px 20px;
     direction:{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }};
     text-align:{{ app()->getLocale() == 'ar' ? 'right' : 'left' }};
-    font-family:'Almarai',sans-serif !important;
+    font-family: 'Zain', sans-serif;
     font-style:italic !important;
     background-color:#f9f9f9;
     margin:0;

@@ -29,7 +29,7 @@
     .style-box{
         width: 50%;
         height: 58%;
-        background: #CF9233;
+        background: #BF9456;
         position: absolute;
         left: -25%;
         top: -172px;
@@ -60,12 +60,12 @@
       font-size: 22px;
       font-weight: bold;
       margin-bottom: 6px;
-      color: #c48b16;
+      color: #BF9456;
     }
 
     .icon {
       margin-left: 6px;
-      color: #c48b16;
+      color: #BF9456;
     }
 
     p {
@@ -102,7 +102,7 @@
     }
 
     .phone {
-      color: #c48b16;
+      color: #BF9456;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -178,6 +178,10 @@
     </style>
 </head>
 <body class="bg-white">
+  @php
+    use App\Models\Branch;
+    $branches = Branch::all();
+  @endphp 
     @include('components.frontend.progress-bar')
 
     <div class="position-relative" style="height: 17vh;">
@@ -195,16 +199,13 @@
                         <h2><span class="icon"><img src="{{ asset('images/icons/Overlay (1).png') }}"></span> {{ __('messagess.addresses') }}</h2>
                         
                         <div class="branches">
+                          @forEach($branches as $branch)
                             <div class="branch">
-                              <strong>{{ __('messagess.branch_one') }}</strong>
-                              <p>{{ __('messagess.branch_one_address') }}</p>
-                              <p class="phone"> <img src="{{ asset('images/icons/basil_phone-solid.png') }}"> {{ __('messagess.branch_one_phone') }}</p>
+                              <strong>{{$branch->name ?? ''}}</strong>
+                              <p>{{$branch->description ?? ''}}</p>
+                              <p class="phone"> <img src="{{ asset('images/icons/basil_phone-solid.png') }}"> {{$branch->contact_number ?? ''}}</p>
                             </div>
-                        <div class="branch">
-                            <strong>{{ __('messagess.branch_two') }}</strong>
-                            <p>{{ __('messagess.branch_two_address') }}</p>
-                             <p class="phone"> <img src="{{ asset('images/icons/basil_phone-solid.png') }}"> {{ __('messagess.branch_two_phone') }}</p>
-                        </div>
+                          @endforeach
                     </div>
                     <a href="https://wa.me/9665569610958" target="_blank" class="whatsapp-btn">
                       <img src="{{ asset('img/logos-whatsapp-icon-2.svg') }}"></img>

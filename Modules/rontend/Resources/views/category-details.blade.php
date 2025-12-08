@@ -11,7 +11,9 @@
     <title>{{ $category->name }} - {{ __('messagess.category_details') }}</title>
 
     
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -30,7 +32,7 @@
     <style>
     body {
       margin: 0;
-      font-family: 'Almarai', sans-serif;
+      font-family: 'Zain', sans-serif;
       background: #fff;
     }
 
@@ -55,9 +57,9 @@
     }
 
     .service-content {
-      font-family: 'Almarai';
+      font-family: 'Zain', sans-serif;
       flex: 1;
-      background: #1c1c1c;
+      background: #BF9456;
       color: #fff;
       padding: 40px;
       display: flex;
@@ -66,7 +68,7 @@
     }
 
     .service-content h4 {
-    color: #cf9233;
+    color: #BF9456;
     margin: 0 0 11px 0;
     font-size: 18px;
     }
@@ -87,7 +89,7 @@
     }
 
     .service-content h3 {
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 20px;
       color: #f5f5f5;
     }
@@ -117,7 +119,7 @@
     width: 100%;
     font-size: 17px;
     height: 100%;
-    font-family: Almarai;
+    font-family: 'Zain', sans-serif;
     transition: opacity 0.3s ease-in-out;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
     display: flex;
@@ -144,7 +146,7 @@
         font-size: 18px;
         text-align: center;
         color: #ffffff;
-        font-family: Almarai;
+        font-family: 'Zain', sans-serif;
         margin: 15px 0;
     }
     .descrip{
@@ -153,14 +155,14 @@
         text-align: center;
         font-weight: 100;
         color: #ffffffbd !important;
-        font-family: Almarai;
-    }
+        font-family: 'Zain', sans-serif;
+      }
     .price_min{
         color: white;
         display: flex;
         justify-content: space-around;
         margin-top: 12px;
-        font-family: Almarai;
+        font-family: 'Zain', sans-serif;
         flex-direction: row-reverse;
     }
     .promo-btn {
@@ -179,7 +181,7 @@
     .more-btn-hero{
     width: 59%;
     height: 43px;
-    background-color: #CF9233;
+    background-color: #BF9456;
     border-radius: 28px;
     display: flex;
     justify-content: center;
@@ -250,12 +252,12 @@
             <div class="col">
                 <a href="{{ url('services/category/' . $Cat->id) }}" style="text-decoration-line: none;">
                     <div class="galary" 
-                         style="background-image: url({{ asset($Cat->av2) }}); 
+                                style="background-image: url('{{ $Cat->av2 ? asset($Cat->av2) : asset('images/av3.webp') }}');"
                                 background-size: cover; 
                                 background-position: center; 
                                 height: 200px; 
                                 border-radius: 18px !important;
-                                @if($Cat->id == $category->id) border: 4px #CF9233 solid; @endif">
+                                @if($Cat->id == $category->id) border: 4px #BF9456 solid; @endif">
                         
                         <!-- Overlay -->
                         <div class="overlay d-flex align-items-end justify-content-center" 
@@ -283,10 +285,18 @@
                     <div class="cont">
                         <h1>{{ $service->name }}</h1>
                             @php
-                                $description = json_decode($service->description, true);
+                              $description = $service->description;
+
+                              if (is_string($description)) {
+                                  $description = json_decode($description, true);
+                              }
+
+                              if (!is_array($description)) {
+                                  $description = [];
+                              }
                             @endphp
-                        @if($description[$currentLocale])
-                        <div class="descrip">{{ Str::limit($description[$currentLocale], 120) }}</div>
+                        @if(!empty($description[$currentLocale]))
+                          <div class="descrip">{{ Str::limit($description[$currentLocale], 120) ?? '' }}</div>
                         @endif
                         
                         <div class="price_min">
@@ -296,7 +306,7 @@
                         
                         <div class="m-btn">
                         <a href="{{route('salon.create')}}" class="more-btn-hero">
-                            <p style="font-weight: 100;color:white;font-size: 16px;margin: 0 13px;font-family: 'Almarai', sans-serif;"><img style="width: 15px;margin: 0 7px;" src="{{ asset('images/icons/Vector (2).png') }}" > {{ __('messagess.book_now') }} </p>
+                            <p style="font-weight: 100;color:white;font-size: 16px;margin: 0 13px;font-family: 'Zain', sans-serif;"><img style="width: 15px;margin: 0 7px;" src="{{ asset('images/icons/Vector (2).png') }}" > {{ __('messagess.book_now') }} </p>
                         </a>
                         </div>
                     </div>

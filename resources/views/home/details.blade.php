@@ -10,10 +10,10 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>Spa Booking - حجز السبا</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap");
+        @import url("https://fonts.cdnfonts.com/css/zain");
 
         body {
-            font-family: "Almarai", sans-serif;
+            font-family: 'Zain', sans-serif;
             background: #faf7f2;
             margin: 0;
             padding: 0;
@@ -24,7 +24,6 @@
             margin: 40px auto;
             display: flex;
             overflow: hidden;
-            border-radius: 20px;
             background: white;
             box-shadow: 0px 10px 40px rgba(0,0,0,0.15);
             animation: fadeUp 1.2s ease-out;
@@ -43,8 +42,9 @@
         }
         
         .right-box {
+            font-family: 'Zain', sans-serif;
             flex: 1;
-            background: #c88d2a;
+            background: #BF9456;
             padding: 45px;
             color: white;
             animation: slideRight 1.3s ease-out;
@@ -143,7 +143,7 @@
     </div>
     <div class="package-container">
         <div class="right-box">
-            <h3 class="title">{{ __('messages.Our special packages') }}</h3>
+            <h3 class="title">{{ __('messagess.our_special_packages') }}</h3>
             <h1 class="main-title">{{ $package['name'][app()->getLocale()] ?? '' }}</h1>
 
             <div class="stars">
@@ -578,9 +578,7 @@
 [dir="rtl"] .form-select,
 [dir="rtl"] .form-textarea {
     text-align: right;
-            font-family: 'Lama Sans', sans-serif !important;
-                font-style: {{ app()->getLocale() == 'ar' ? 'italic !important' : 'normal !important' }};
-
+    font-family: 'Zain', sans-serif;
 }
 
 .form-input:focus,
@@ -610,9 +608,7 @@
 }
 
 [dir="rtl"] .submit-button {
-            font-family: 'Lama Sans', sans-serif !important;
-                font-style: {{ app()->getLocale() == 'ar' ? 'italic !important' : 'normal !important' }};
-
+    font-family: 'Zain', sans-serif;
 }
 
 .submit-button:hover {
@@ -678,9 +674,7 @@
 
 [dir="rtl"] .toast-text h4,
 [dir="rtl"] .toast-text p {
-            font-family: 'Lama Sans', sans-serif !important;
-                font-style: {{ app()->getLocale() == 'ar' ? 'italic !important' : 'normal !important' }};
-
+    font-family: 'Zain', sans-serif;
 }
 
 /* Loading state */

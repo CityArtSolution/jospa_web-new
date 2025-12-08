@@ -40,6 +40,8 @@ class SignController extends Controller
         // }
 
          $user = User::create([
+            'first_name' => $validated['username'],
+            'last_name' => $validated['username'],
             'username' => $validated['username'],
             'mobile'   => $validated['mobile'],
             'gender'   => 'female', // افتراضي
@@ -135,25 +137,13 @@ class SignController extends Controller
         $data = [];
     
         if ($request->hasFile('profile_image')) {
-    $image = $request->file('profile_image');
-    $imageName = 'user_' . $id . '_' . time() . '.' . $image->getClientOriginalExtension();
-
-    // المسار الصحيح داخل public_html
-    $destinationPath = '/home/city2tec/public_html/profile_images';
-
-    // تأكد إنو المجلد موجود
-    if (!file_exists($destinationPath)) {
-        mkdir($destinationPath, 0775, true);
-    }
-
-    // نقل الصورة
-    $image->move($destinationPath, $imageName);
-
-    // خزن المسار النسبي بالنسبة للموقع
-    $data['avatar'] = 'profile_images/' . $imageName;
-} else {
-    $data['avatar'] = auth()->user()->avatar;
-}
+            $image = $request->file('profile_image');
+            $imageName = 'user_' . $id . '_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('profile_images'), $imageName);
+            $data['avatar'] = 'profile_images/' . $imageName;
+        } else {
+            $data['avatar'] = auth()->user()->avatar;
+        }
 
     
         $data['first_name']    = $request->first_name;

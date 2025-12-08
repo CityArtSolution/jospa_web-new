@@ -12,7 +12,7 @@
    body {
         background: #f5f1ea;
         direction: rtl;
-        font-family: 'Tajawal', sans-serif;
+        font-family:'Tajawal', sans-serif;
     }
     
     .loyalty-container {

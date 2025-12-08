@@ -28,7 +28,7 @@
     }
 
     .card-body {
-      background: #F3F5F5;
+      background: #F9F6F0;
     }
 
     .card-title {
@@ -80,9 +80,11 @@
                 <i class="fas fa-chevron-down"></i>
               </h5>
               <ul class="list-unstyled mt-3 toggle-content">
+              @if ($term->points)
                 @foreach($term->points[app()->getLocale()] as $point)
                 <li>{{ $point }}</li>
                 @endforeach
+              @endif
               </ul>
             </div>
           </div>

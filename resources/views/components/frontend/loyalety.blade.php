@@ -78,6 +78,7 @@
             height: 48px;
             width: 48px;
             object-fit: contain;
+            object-position: top;
         }
 
         .nav-menu {
@@ -168,7 +169,7 @@
 
 .hero-bg img {
     width: 100%;
-    height: 90%;
+    height: 230%;
     object-fit: cover;
 }
 
@@ -220,7 +221,7 @@
 }
 
 .pricing-card {
-    background-color: rgba(38, 32, 32, 0.9);
+    background-color: rgb(255 255 255 / 0%);
     backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     border-radius: 0.5rem;
@@ -244,8 +245,8 @@ footer {
 
 
         .pricing-header-item {
-            background-color: var(--primary);
-            color: var(--primary-foreground);
+            background: #BF9456;
+            color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             text-align: center;
@@ -262,7 +263,8 @@ footer {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-            background-color: var(--background);
+            background: white;
+            color: #000;
             border: 1px solid var(--border);
             border-radius: 0.5rem;
             overflow: hidden;
@@ -270,17 +272,13 @@ footer {
         }
 
         .pricing-row:hover {
-            border-color: var(--primary);
+            border-color: #BF9456;
         }
 
         .pricing-cell {
             padding: 1rem 1.5rem;
             text-align: center;
             font-weight: 600;
-        }
-
-        .pricing-cell:first-child {
-            border-left: 1px solid var(--border);
         }
 
     </style>
@@ -293,7 +291,7 @@ footer {
     <!-- Page Content -->
             <section class="hero">
             <div class="hero-bg">
-                <img src="images/pages/Rectangle%2042623.png" alt="Background">
+                <img src="{{ asset('loyality-bg.jpg') }}" alt="Background">
                 <div class="hero-overlay"></div>
             </div>
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('end_date');   // تاريخ النهاية
             $table->string('image')->nullable(); // صورة العرض
             $table->string('color', 50)->nullable();
-            $table->boolean('overlay')->default(0)->after('color');
+            $table->boolean('overlay')->default(0);
             $table->string('link')->nullable();  // رابط العرض
             $table->timestamps();
         });

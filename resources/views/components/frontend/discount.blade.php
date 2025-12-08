@@ -11,42 +11,34 @@
         overflow: hidden;
     }
     .radius{
-        height: 550px;
-        border-radius: 77%;
-        position: absolute;
-        width: 137%;
-        left: -290px;
-        background:#f9f9f9;
+        background-image: url(carly.png);
+        height: 440px;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
     }
     .discount-section {
-        top: 30%;
-        position: absolute;
-        left: 48%;
-        height: 296px;
-        padding: 21px;
-        width: 33%;
-        gap: 28px;
-        display: flex;
-        flex-direction: column;
+        margin-top: 70px;
+        text-align: center;
     }
     .discount-section h1 {
-        font-family: 'Almarai';
+        font-family: 'Zain', sans-serif;
         font-size: 57px;
         font-weight: bold;
-        background: linear-gradient(90deg, #CF9233, #212121);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: white;
+        margin-bottom: 20px;
     }
     .discount-section h3 {
-        color: #212121;
-        font-family: 'Almarai';
-        font-size: large;
+        color: white;
+        font-family: 'Zain', sans-serif;
+        font-size: 27px;
+        margin: 44px;
     }
     .more-btn-discount {
         margin-top: 0;
-        width: 45%;
+        width: 100%;
         height: 55px;
-        background-color: #CF9233;
+        background-color: white;
         border-radius: 28px;
         display: flex;
         justify-content: center;
@@ -54,14 +46,7 @@
         position: relative;
         cursor: pointer;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .more-btn-discount::before {
-        content: "";
-        position: absolute;
-        width: 96%;
-        height: 80%;
-        border: 2px solid white;
-        border-radius: 28px;
+        border: 3px solid #BF9456;
     }
     @media (max-width: 576px) {
         .radius {
@@ -73,6 +58,7 @@
         }
     }
 </style>
+@if($page)
 <div class="head-discount">
     <div class="radius">
         <div class="discount-section">
@@ -90,11 +76,15 @@
                     }
                 @endphp
                 <h1>{{ __('messages.discount') }} {{ intval($page->discount_value) }} {{ $page->discount_type == 'percentage' ? '%' : 'ريال' }}</h1>
-                <h3>{{ $description }}</h3>
-                <a href="{{route('frontend.Ouroffers')}}" class="more-btn-discount">
-                    <p style="color:white;font-size: 16px;margin: 0 13px;">{{ __('messagess.learn_more') }}</p>
-                </a>
+                <h3>{{ $description }} "vdsfimvdfojbdgoindgoi nfgonfgon"</h3>
+                <div style="width: 17%;margin: auto;">
+                    <a href="{{route('frontend.Ouroffers')}}" class="more-btn-discount">
+                        <p style="color:white;font-size: 16px;margin: 0 13px;color:#BF9456">{{ __('messagess.learn_more') }}</p>
+                    </a>
+                </div>
             @endif
         </div>
+        <img src="{{ asset('fl-dis.png') }}" alt="" style="position: absolute;left: 0;bottom: -11px;width: 195px;">
     </div>
 </div>
+@endif

@@ -9,9 +9,9 @@
         @if(isset($packages) && $packages->count() > 0)
             <div class="row g-4">
                 @foreach($packages as $index => $package)
-                    <div class="col-12 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         @include('components.frontend.package-card', [
-                            'image' => $package->media->first()->original_url ?? asset('images/frontend/Rectangle 42489.png'),
+                            'image' => $package->media->first()->original_url ?? asset('images/pages/main-bg.png'),
                             'name' => $package->name,
                             'description' => Str::limit($package->description ?? '', 100),
                             'price' => 'SR ' . number_format($package->package_price ?? 0, 2),

@@ -15,11 +15,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #f8f8f8;
-      font-family: 'Almarai', sans-serif !important;
+      font-family: 'Zain', sans-serif !important;
+
     }
     .order-summary {
       background: #fff;
@@ -71,7 +74,7 @@
       font-size: 22px;
     }
     .table thead th {
-      background-color: #CF9233;
+      background-color: #BF9456;
       color: white;
       text-align: center;
     }
@@ -107,7 +110,7 @@
         padding: 10px;
         width: 13%;
         background: #FF473E;
-        border-radius: 10px;
+        border-radius: 10px !important;
         border: none;
     }
     .service-delete{
@@ -120,10 +123,10 @@
         height: 40px;
         border-radius: 10px 0 0 10px;
         padding: 10px;
-        color: black;
+        color: white;
         font-size: 12px;
         font-weight: bold;
-        background: #D9D9D9;
+        background: #BF9456;
         border: none;
         cursor: pointer;
     }
@@ -156,7 +159,7 @@
         color: white;
         width: 70%;
         height: 55px;
-        background-color: #CF9233;
+        background-color: #BF9456;
         border-radius: 28px;
         display: flex;
         justify-content: center;
@@ -181,7 +184,7 @@
         width: 100% !important;
     }
     .table thead th {
-        color: #CF9233;
+        color: #BF9456;
     }
     .prc{
         display:none;
