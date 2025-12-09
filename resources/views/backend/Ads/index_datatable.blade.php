@@ -5,67 +5,101 @@
 @endsection
 
 @push('after-styles')
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <style>
-    .ads-page {
-        padding: 20px;
-    }
-    .ads-card {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 20px;
-        background: #fff;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        margin-bottom: 10px;
-        text-align: center;
-    }
-    .ads-card h5 {
+    h2 {
+        color: #BF9456;
         margin-bottom: 15px;
-        font-weight: bold;
-        color: #333;
+        font-size: 1.5rem;
+        border-bottom: 2px solid #BF9456;
+        padding-bottom: 5px;
     }
-    .ads-card input[type="file"] {
-        display: none;
+
+    .section {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
-    .ads-card label {
+
+    .upload-btn {
         display: inline-block;
         padding: 10px 20px;
-        background: #2196f3;
-        color: #fff;
+        margin-bottom: 15px;
         border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .ads-card label:hover {
-        background: #1976d2;
-    }
-    .preview-img {
-        margin: 15px auto;
-        max-height: 150px;
-        border-radius: 8px;
-        object-fit: cover;
-        display: none;
-    }
-    .save-btn {
-        margin-top: 30px;
-        padding: 12px 25px;
-        font-size: 18px;
-        font-weight: bold;
-        border: none;
-        border-radius: 8px;
-        background: #28a745;
+        background: #BF9456;
         color: #fff;
-        transition: 0.3s;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
     }
-    .save-btn:hover {
-        background: #218838;
+
+    .upload-btn:hover {
+        background: #a67c45;
+    }
+
+    input[type="file"] { display: none; }
+
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .image-card {
+        width: 150px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        background: #fafafa;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .image-card img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 5px;
+        border-radius: 3px;
+    }
+
+    .image-actions {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .image-actions button {
+        padding: 5px 10px;
+        font-size: 12px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .btn-toggle {
+        background: #4CAF50;
+        color: #fff;
+    }
+
+    .btn-toggle.inactive {
+        background: #f44336;
+    }
+
+    .btn-delete {
+        background: #888;
+        color: #fff;
     }
 </style>
 @endpush
 
 @section('content')
-<div class="container ads-page">
+{{--<div class="container ads-page">
     <form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -109,42 +143,136 @@
             </button>
         </div>
     </form>
+</div>--}}
+<div class="section">
+    <h2>Main Page Banners</h2>
+    <label class="upload-btn" for="banners">Upload Banners</label>
+    <input type="file" id="banners" multiple accept="image/*">
+    
+    <div class="image-grid" id="banners-grid">
+        <!-- Example: صور موجودة من الداتابيز -->
+        <div class="image-card">
+            <img src="banner1.jpg" alt="Banner 1">
+            <div class="image-actions">
+                <button class="btn-toggle">Active</button>
+                <button class="btn-delete">Delete</button>
+            </div>
+        </div>
+        <div class="image-card">
+            <img src="banner2.jpg" alt="Banner 2">
+            <div class="image-actions">
+                <button class="btn-toggle inactive">Inactive</button>
+                <button class="btn-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Packages Section -->
+<div class="section">
+    <h2>Packages Section Images</h2>
+    <label class="upload-btn" for="packages">Upload Packages</label>
+    <input type="file" id="packages" multiple accept="image/*">
+
+    <div class="image-grid" id="packages-grid">
+        <!-- Example images -->
+    </div>
+</div>
+
+<!-- Services Section -->
+<div class="section">
+    <h2>Services Section Images</h2>
+    <label class="upload-btn" for="services">Upload Services</label>
+    <input type="file" id="services" multiple accept="image/*">
+
+    <div class="image-grid" id="services-grid">
+        <!-- Example images -->
+    </div>
 </div>
 @endsection
 
 @push('after-scripts')
-<!-- JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
+    function previewImages(input, containerId) {
+        const container = document.getElementById(containerId);
+        Array.from(input.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const div = document.createElement('div');
+                div.classList.add('image-card');
+                div.innerHTML = `
+                    <img src="${reader.result}" alt="Uploaded Image">
+                    <div class="image-actions">
+                        <button class="btn-toggle active">Active</button>
+                        <button class="btn-delete">Delete</button>
+                    </div>
+                `;
+                container.appendChild(div);
 
-    function previewImage(inputId, previewId) {
-        const input = document.getElementById(inputId);
-        const preview = document.getElementById(previewId);
+                // Delete functionality
+                div.querySelector('.btn-delete').addEventListener('click', () => {
+                    div.remove();
+                });
 
-        input.addEventListener("change", function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = "block";
-                };
-                reader.readAsDataURL(file);
-            }
+                // Toggle functionality
+                const toggleBtn = div.querySelector('.btn-toggle');
+                toggleBtn.addEventListener('click', () => {
+                    toggleBtn.classList.toggle('inactive');
+                    if(toggleBtn.classList.contains('inactive')){
+                        toggleBtn.textContent = 'Inactive';
+                    } else {
+                        toggleBtn.textContent = 'Active';
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
         });
     }
 
-    previewImage("slider1", "preview1");
-    previewImage("slider2", "preview2");
-    previewImage("thumbnail", "preview3");
-            
-    @if(session('success'))
-        toastr.success("{{ session('success') }}");
-    @endif
+    document.getElementById('banners').addEventListener('change', function() {
+        previewImages(this, 'banners-grid');
+    });
 
-    @if(session('error'))
-        toastr.error("{{ session('error') }}");
-    @endif
+    document.getElementById('packages').addEventListener('change', function() {
+        previewImages(this, 'packages-grid');
+    });
+
+    document.getElementById('services').addEventListener('change', function() {
+        previewImages(this, 'services-grid');
+    });
 </script>
+<!-- JS -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>-->
+<!--<script>-->
+
+<!--    function previewImage(inputId, previewId) {-->
+<!--        const input = document.getElementById(inputId);-->
+<!--        const preview = document.getElementById(previewId);-->
+
+<!--        input.addEventListener("change", function () {-->
+<!--            const file = this.files[0];-->
+<!--            if (file) {-->
+<!--                const reader = new FileReader();-->
+<!--                reader.onload = function (e) {-->
+<!--                    preview.src = e.target.result;-->
+<!--                    preview.style.display = "block";-->
+<!--                };-->
+<!--                reader.readAsDataURL(file);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--    previewImage("slider1", "preview1");-->
+<!--    previewImage("slider2", "preview2");-->
+<!--    previewImage("thumbnail", "preview3");-->
+            
+<!--    @if(session('success'))-->
+<!--        toastr.success("{{ session('success') }}");-->
+<!--    @endif-->
+
+<!--    @if(session('error'))-->
+<!--        toastr.error("{{ session('error') }}");-->
+<!--    @endif-->
+<!--</script>-->
 @endpush
