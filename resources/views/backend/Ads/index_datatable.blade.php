@@ -102,12 +102,12 @@
 
 <form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
-
     <!-- HOME SECTION -->
     <div class="section">
         <h2>Main Page Banners</h2>
         <input type="hidden" name="page" value="home">
         <label class="upload-btn" for="home-input">Upload Banners</label>
+        <button type="submit" class="btn-delete">save</button>
         <input type="file" id="home-input" name="images[]" multiple accept="image/*">
 
         <div class="image-grid" id="home-grid">

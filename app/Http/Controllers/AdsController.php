@@ -18,13 +18,11 @@ class AdsController extends Controller
     public function store(Request $request){
         $request->validate([
             'page'   => 'required',
-            'status' => 'required',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $ad = new Ad();
         $ad->page   = $request->page;
-        $ad->status = $request->status;
         
         if (!file_exists(public_path('uploads/ads'))) {
             mkdir(public_path('uploads/ads'), 0777, true);
@@ -36,7 +34,6 @@ class AdsController extends Controller
                 $img->move(public_path('uploads/ads'), $imageName);
                 Ad::create([
                     'page'   => $request->page,
-                    'status' => $request->status,
                     'image'  => 'uploads/ads/' . $imageName,
                 ]);
             }
