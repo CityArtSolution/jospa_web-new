@@ -1,6 +1,6 @@
 @php
     use App\Models\Ad;
-    $ad = Ad::where('page' , 'packages')->where('status', 1)->get();
+    $ads = Ad::where('page' , 'home')->where('status', 1)->get();
 
 @endphp
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

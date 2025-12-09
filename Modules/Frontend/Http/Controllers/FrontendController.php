@@ -76,7 +76,7 @@ class FrontendController extends Controller
 
     public function Packages()
 {
-    $ad = Ad::where('page' , 'packages')->where('status', 1)->get();
+    $ads = Ad::where('page' , 'packages')->where('status', 1)->get();
 
     $packages = Package::with([
         'service',
@@ -90,7 +90,7 @@ class FrontendController extends Controller
 
     return view('frontend::Packages', [
         'packages' => $packages,
-        'ad' => $ad
+        'ads' => $ads
     ]);
 }
 
@@ -113,7 +113,7 @@ class FrontendController extends Controller
      */
     public function services()
     {
-        $ad = Ad::where('page' , 'services')->where('status', 1)->get();
+        $ads = Ad::where('page' , 'services')->where('status', 1)->get();
          // Fetch active services for the homepage
          $services = Service::with(['category', 'media'])
          ->where('status', 1)
@@ -136,7 +136,7 @@ class FrontendController extends Controller
             ->take(6)
             ->get();
 
-        return view('frontend::services', compact('categories', 'services', 'packages' , 'ad'));
+        return view('frontend::services', compact('categories', 'services', 'packages' , 'ads'));
     }
 
     /**
@@ -144,7 +144,7 @@ class FrontendController extends Controller
      */
     public function shop()
     {
-        $ad = Ad::where('page' , 'shop')->where('status', 1)->get();
+        $ads = Ad::where('page' , 'shop')->where('status', 1)->get();
 
             // Fetch active products for the homepage
     $categories = ProductCategory::with(['products' => function ($q) {
@@ -156,7 +156,7 @@ class FrontendController extends Controller
     ->where('product_categories.status', 1)
     ->get();
 
-        return view('frontend::shop', compact( 'categories' , 'ad'));
+        return view('frontend::shop', compact( 'categories' , 'ads'));
     }
 
     public function productDetails($id)

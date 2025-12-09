@@ -20,6 +20,20 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+        <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        .swiper-pagination-bullet-active {
+            background-color: #BF9456; 
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     @include('components.frontend.progress-bar')
@@ -28,45 +42,47 @@
     <div class="position-relative" style="height: 17vh;">
         @include('components.frontend.second-navbar')
     </div>
-    @if($ads->isNotEmpty())
-        <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 37px; position: relative;">
-            <div class="packages-slider" style="position: relative; width: 75%; height: auto; overflow: hidden;">
-                @foreach($ads as $key => $item)
-                    <img src="{{ asset($item->image) }}" class="{{ $key == 0 ? 'active' : '' }}" 
-                        style="width: 100%; position: absolute; top: 0; left: 0; display: {{ $key == 0 ? 'block' : 'none' }};">
-                @endforeach
-            </div>
+    
+    <!-- Swiper -->
+    <div class="swiper mySwiper" style="display: flex; justify-content: center; align-items: center; margin-top: 37px;">
+        <div class="swiper-wrapper">
+            @foreach($ads as $ad)
+                <div class="swiper-slide" style="display: flex; justify-content: center; align-items: center;">
+                    <img src="{{ asset($ad->image) }}" style="width: 65%; height: 250px; object-fit: cover; border-radius: 8px;">
+                </div>
+            @endforeach
         </div>
-    @endif
-    <main>
-        @include('components.frontend.services-section', compact('packages'))
-    </main>
+    
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
 
+    
+    <main style="margin-bottom: 40px;">
+        @include('components.frontend.premium-packages-section', compact('packages'))
+    </main>
+    <div class="position-relative" style="height: 17vh;">
+    </div>
     <!-- Footer -->
     @include('components.frontend.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            const slides = document.querySelectorAll('.packages-slider img');
-            let currentIndex = 0;
-            const slideCount = slides.length;
-
-            function showSlide(index){
-                slides.forEach((img, i) => {
-                    img.style.display = i === index ? 'block' : 'none';
-                });
-            }
-
-            function nextSlide(){
-                currentIndex = (currentIndex + 1) % slideCount;
-                showSlide(currentIndex);
-            }
-
-            // تغيير الصورة كل 3 ثواني
-            if(slideCount > 1){
-                setInterval(nextSlide, 3000);
-            }
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            effect: 'fade', // تأثير fade بسيط
+            fadeEffect: {
+                crossFade: true
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true, // النقط قابلة للنقر للتنقل
+            },
         });
     </script>
 </body>
