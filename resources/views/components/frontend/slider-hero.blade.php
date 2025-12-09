@@ -114,6 +114,21 @@
         left: 0;
         border-radius: 230px;
     }
+    @media (max-width: 576px) {
+        .slider img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            display: none;
+            position: absolute;
+            top: 133px;
+            left: 0;
+            border-radius: 230px;
+        }
+        .first-sec h1 {
+            margin-bottom: 7px;
+        }
+    }
 
     .slider img.active {
         display: block;

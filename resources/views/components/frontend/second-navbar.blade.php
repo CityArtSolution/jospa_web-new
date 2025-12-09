@@ -74,7 +74,8 @@
     }
     .more-btn-nav{
         margin-top: 0;
-        width: 71%;
+        width: fit-content;
+        white-space: nowrap;
         height: 55px;
         background-color: white;
         border-radius: 28px;

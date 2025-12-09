@@ -20,6 +20,12 @@
     background-color: rgba(255,255,255,0.2) !important;
     color: #000 !important;
 }
+@media (max-width: 576px) {
+    .gift-desc-responsive {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
 </style>
 <section class="position-relative" style="height: calc(100vh - 200px);">
     <img src="{{ asset('images/pages/gift-bg.png') }}" alt="{{ __('messagess.background_alt') }}" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover; min-height: 500px">

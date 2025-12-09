@@ -82,7 +82,7 @@ class FrontendController extends Controller
         'service',
         'service.services',
         'media',
-        'branch' // أضفنا علاقة الفرع
+        'branch'
     ])
     ->where('status', 1)
     ->whereDate('end_date', '>=', now())

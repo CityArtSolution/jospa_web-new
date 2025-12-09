@@ -4,6 +4,9 @@
     .s-s-mt-100 {
         margin-top: 100px;
     }
+    #bookNaw{
+      margin-top: 50px;
+    }
 }
 .row {
     --bs-gutter-x: 0rem;

@@ -14,6 +14,15 @@
     height: auto;
     filter: sepia(100%) saturate(16) hue-rotate(-50deg);
   }
+  @media (max-width: 576px) {
+    .learn-logo img {
+      width: 345px;
+    }
+    .learn-content{
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+  }
   .learn-content{
     width: 50%;
     text-align: center;
