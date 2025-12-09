@@ -106,9 +106,9 @@
     <div class="section">
         <h2>Main Page Banners</h2>
         <input type="hidden" name="page" value="home">
-        <label class="upload-btn" for="home-input">Upload Banners</label>
-        <button type="submit" class="btn-delete">save</button>
-        <input type="file" id="home-input" name="images[]" multiple accept="image/*">
+        <label class="upload-btn" for="home-input">{{ __('messagess.upload_banners') }}</label>
+        <button type="submit" class="upload-btn">{{ __('messagess.save') }}</button>
+        <input type="file" id="home-input" name="images" accept="image/*">
 
         <div class="image-grid" id="home-grid">
             @foreach($home as $img)
@@ -116,16 +116,12 @@
                     <img src="{{ asset($img->image) }}" alt="Ad Image">
                     <div class="image-actions">
                         @if($img->status == 1)
-                            <button class="btn-toggle active">Active</button>
+                            <button class="btn-toggle active" type="button" onclick="updateStatus({{ $img->id }}, 1, this)">{{ __('messagess.active') }}</button>
                         @else
-                            <button class="btn-toggle inactive">Inactive</button>
+                            <button class="btn-toggle inactive" type="button" onclick="updateStatus({{ $img->id }}, 0, this)">{{ __('messagess.inactive') }}</button>
                         @endif
 
-                        <form action="{{ route('ads.destroy', $img->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn-delete">Delete</button>
-                        </form>
+                        <button class="btn-delete" type="button" onclick="deleteImge({{ $img->id }})">{{ __('messagess.delete') }}</button>
                     </div>
                 </div>
             @endforeach
@@ -135,94 +131,95 @@
 
 
 <!-- PACKAGES SECTION -->
-<div class="section">
-    <h2>Packages Section Images</h2>
-    <label class="upload-btn" for="packages-input">Upload Packages</label>
-    <input type="file" id="packages-input" multiple accept="image/*">
+<form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="section">
+        <h2>{{ __('messagess.packages_section_images') }}</h2>
+        <label class="upload-btn" for="packages-input">{{ __('messagess.upload_packages') }}</label>
+        <input type="hidden" name="page" value="packages">
+        <input type="file" id="packages-input" name="images" accept="image/*">
+        <button type="submit" class="upload-btn">{{ __('messagess.save') }}</button>
+    
+        <div class="image-grid" id="packages-grid">
+            @foreach($packages as $pack)
+                <div class="image-card">
+                    <img src="{{ asset($pack->image) }}" alt="Ad Image">
+    
+                    <div class="image-actions">
+                        @if($pack->status == 1)
+                            <button class="btn-toggle active" type="button" onclick="updateStatus({{ $pack->id }}, 1, this)">{{ __('messagess.active') }}</button>
+                        @else
+                            <button class="btn-toggle inactive" type="button" onclick="updateStatus({{ $pack->id }}, 0, this)">{{ __('messagess.inactive') }}</button>
+                        @endif
 
-    <div class="image-grid" id="packages-grid">
-        @foreach($packages as $pack)
-            <div class="image-card">
-                <img src="{{ asset($pack->image) }}" alt="Ad Image">
-
-                <div class="image-actions">
-                    @if($pack->status == 1)
-                        <button class="btn-toggle active">Active</button>
-                    @else
-                        <button class="btn-toggle inactive">Inactive</button>
-                    @endif
-
-                    <form action="{{ route('ads.destroy', $pack->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-delete">Delete</button>
-                    </form>
+                        <button class="btn-delete" type="button" onclick="deleteImge({{ $pack->id }})">{{ __('messagess.delete') }}</button>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
-
+</form>
 
 <!-- SERVICES SECTION -->
-<div class="section">
-    <h2>Services Section Images</h2>
-    <label class="upload-btn" for="services-input">Upload Services</label>
-    <input type="file" id="services-input" multiple accept="image/*">
-
-    <div class="image-grid" id="services-grid">
-        @foreach($servises as $serve)
-            <div class="image-card">
-                <img src="{{ asset($serve->image) }}" alt="Ad Image">
-
-                <div class="image-actions">
-                    @if($serve->status == 1)
-                        <button class="btn-toggle active">Active</button>
-                    @else
-                        <button class="btn-toggle inactive">Inactive</button>
-                    @endif
-
-                    <form action="{{ route('ads.destroy', $serve->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-delete">Delete</button>
-                    </form>
+<form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="section">
+        <h2>{{ __('messagess.services_section_images') }}</h2>
+        <label class="upload-btn" for="services-input">{{ __('messagess.upload_services') }}</label>
+        <input type="hidden" name="page" value="services">
+        <input type="file" id="services-input" name="images" accept="image/*">
+        <button type="submit" class="upload-btn">{{ __('messagess.save') }}</button>
+    
+        <div class="image-grid" id="services-grid">
+            @foreach($services as $serve)
+                <div class="image-card">
+                    <img src="{{ asset($serve->image) }}" alt="Ad Image">
+    
+                    <div class="image-actions">
+                        @if($serve->status == 1)
+                            <button class="btn-toggle active" type="button" onclick="updateStatus({{ $serve->id }}, 1, this)">{{ __('messagess.active') }}</button>
+                        @else
+                            <button class="btn-toggle inactive" type="button" onclick="updateStatus({{ $serve->id }}, 0, this)">{{ __('messagess.inactive') }}</button>
+                        @endif
+    
+                        <button class="btn-delete" type="button" onclick="deleteImge({{ $serve->id }})">{{ __('messagess.delete') }}</button>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
-
+</form>
 
 <!-- SHOP SECTION -->
-<div class="section">
-    <h2>Shop Section Images</h2>
-    <label class="upload-btn" for="shop-input">Upload Shop Images</label>
-    <input type="file" id="shop-input" multiple accept="image/*">
+<form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="section">
+        <h2>{{ __('messagess.shop_section_images') }}</h2>
+        <label class="upload-btn" for="shop-input">{{ __('messagess.upload_shop_images') }}</label>
+        <input type="hidden" name="page" value="shop">
+        <input type="file" id="shop-input" name="images" accept="image/*">
+        <button type="submit" class="upload-btn">{{ __('messagess.save') }}</button>
+    
+        <div class="image-grid" id="shop-grid">
+            @foreach($shop as $item)
+                <div class="image-card">
+                    <img src="{{ asset($item->image) }}" alt="Ad Image">
+    
+                    <div class="image-actions">
+                            @if($item->status == 1)
+                                <button class="btn-toggle active" type="button" onclick="updateStatus({{ $item->id }}, 1, this)">{{ __('messagess.active') }}</button>
+                            @else
+                                <button class="btn-toggle inactive" type="button" onclick="updateStatus({{ $item->id }}, 0, this)">{{ __('messagess.inactive') }}</button>
+                            @endif
 
-    <div class="image-grid" id="shop-grid">
-        @foreach($shop as $item)
-            <div class="image-card">
-                <img src="{{ asset($item->image) }}" alt="Ad Image">
-
-                <div class="image-actions">
-                    @if($item->status == 1)
-                        <button class="btn-toggle active">Active</button>
-                    @else
-                        <button class="btn-toggle inactive">Inactive</button>
-                    @endif
-
-                    <form action="{{ route('ads.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-delete">Delete</button>
-                    </form>
+                        
+                        <button class="btn-delete" type="button" onclick="deleteImge({{ $item->id }})">{{ __('messagess.delete') }}</button>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
-
+</form>
 @endsection
 
 
@@ -237,10 +234,6 @@
                 div.classList.add('image-card');
                 div.innerHTML = `
                     <img src="${reader.result}" alt="Uploaded Image">
-                    <div class="image-actions">
-                        <button class="btn-toggle active">Active</button>
-                        <button class="btn-delete">Delete</button>
-                    </div>
                 `;
                 container.appendChild(div);
 
@@ -274,4 +267,68 @@
         previewImages(this, 'shop-grid');
     });
 </script>
+<!--change status script-->
+<script>
+function updateStatus(id, currentStatus, btn) {
+    let newStatus = currentStatus == 1 ? 0 : 1;
+
+    fetch(`/ads/update-status/${id}`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            if(newStatus == 1){
+                btn.classList.remove('inactive');
+                btn.classList.add('active');
+                btn.innerText = 'Active';
+                btn.setAttribute('onclick', `updateStatus(${id}, 1, this)`);
+            } else {
+                btn.classList.remove('active');
+                btn.classList.add('inactive');
+                btn.innerText = 'Inactive';
+                btn.setAttribute('onclick', `updateStatus(${id}, 0, this)`);
+            }
+        } else {
+            alert('حدث خطأ أثناء تغيير الحالة');
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        alert('حدث خطأ في الاتصال');
+    });
+}
+</script>
+<!--delete Imge script-->
+<script>
+    function deleteImge(id, btn) {
+
+    if(!confirm('هل أنت متأكد من حذف هذه الصورة؟')) return;
+
+    fetch(`/app/ads/destroy/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        location.reload();
+    })
+    .catch(err => {
+        console.log(err);
+        alert('حدث خطأ في الاتصال');
+    });
+}
+
+</script>
+
 @endpush

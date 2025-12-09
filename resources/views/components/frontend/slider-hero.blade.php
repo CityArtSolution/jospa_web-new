@@ -1,3 +1,8 @@
+@php
+    use App\Models\Ad;
+    $ad = Ad::where('page' , 'packages')->where('status', 1)->get();
+
+@endphp
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 <style>
@@ -189,15 +194,18 @@
             </div>
         </div>
         <div class="second-sec">
-            <div class="slider">
-                <img src="images/pages/main-bg.png" class="active" alt="">
-                <img src="images/pages/main-bg.png" alt="">
-                <img src="images/pages/main-bg.png" alt="">
-            </div>
+            @if (!empty($ads))
+                <div class="slider">
+                    @foreach($ads as $key => $item)
+                    <img src="{{ asset($item->image) }}" class="{{ $key == 0 ? 'active' : '' }}" alt="Package Image">
+                    @endforeach
+                </div>
+            @endif
+            
             <div class="pagination">
-                <span class="active"></span>
-                <span></span>
-                <span></span>
+                @foreach($ads as $key => $item)
+                    <span class="{{ $key == 0 ? 'active' : '' }}"></span>
+                @endforeach
             </div>
         </div>
     </div>

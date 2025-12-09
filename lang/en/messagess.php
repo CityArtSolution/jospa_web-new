@@ -1,5 +1,16 @@
 <?php
 return [
+    'main_page_banners'        => 'Main Page Banners',
+    'packages_section_images'  => 'Packages Section Images',
+    'upload_packages'          => 'Upload Packages',
+    'services_section_images'  => 'Services Section Images',
+    'upload_services'          => 'Upload Services',
+    'shop_section_images'      => 'Shop Section Images',
+    'upload_shop_images'       => 'Upload Shop Images',
+    'upload_banners'           => 'Upload Banners',
+    'active'                   => 'Active',
+    'inactive'                 => 'Inactive',
+    'delete'                   => 'Delete',
     'our_special_packages' => 'Our special packages',
     'vision_title' => 'Our Vision at Jo Spa',
     'vision_text' => 'To be the premier wellness destination, where beauty meets tranquility, and every visit transforms into a unique experience that delights the senses and rejuvenates both body and soul. We strive to promote the true concept of luxury by providing a distinctive environment that combines advanced treatments, personalized care, and privacy, ensuring inner and outer balance for every guest.',

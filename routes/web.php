@@ -429,7 +429,9 @@ Route::get('lang/{locale}', function ($locale) {
 
         Route::put('/TermsAndConditions/{id}/update', [TermsAndConditionsController::class, 'update'])->name('TermsAndConditions.update');
         Route::put('/reject/update/{id}', [RejectController::class, 'update']);
-
+        Route::put('/ads/update-status/{id}', [AdsController::class, 'updateStatus'])->name('ads.update-status');
+        
+        Route::delete('/app/ads/destroy/{id}', [AdsController::class, 'destroy'])->name('ads.destroy');
         Route::delete('/app/Wheel/settings/destroy/{id}', [WheelController::class, 'destroy'])->name('Wheel.destroy');
         Route::delete('/app/Wheel/settings/destroy_all', [WheelController::class, 'destroy_all'])->name('Wheel.destroy_all');
         Route::get('/TermsAndConditions/{id}', [TermsAndConditionsController::class, 'destroy'])->name('TermsAndConditions.destroy');

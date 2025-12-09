@@ -28,9 +28,14 @@
     <div class="position-relative" style="height: 17vh;">
         @include('components.frontend.second-navbar')
     </div>
-    @if(isset($ad['pack_bannar']))
-        <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-top: 37px;">
-            <img style="width: 75%;" src="{{$ad['pack_bannar']}}">
+    @if($ads->isNotEmpty())
+        <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 37px; position: relative;">
+            <div class="packages-slider" style="position: relative; width: 75%; height: auto; overflow: hidden;">
+                @foreach($ads as $key => $item)
+                    <img src="{{ asset($item->image) }}" class="{{ $key == 0 ? 'active' : '' }}" 
+                        style="width: 100%; position: absolute; top: 0; left: 0; display: {{ $key == 0 ? 'block' : 'none' }};">
+                @endforeach
+            </div>
         </div>
     @endif
     <main>
@@ -41,5 +46,28 @@
     @include('components.frontend.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const slides = document.querySelectorAll('.packages-slider img');
+            let currentIndex = 0;
+            const slideCount = slides.length;
+
+            function showSlide(index){
+                slides.forEach((img, i) => {
+                    img.style.display = i === index ? 'block' : 'none';
+                });
+            }
+
+            function nextSlide(){
+                currentIndex = (currentIndex + 1) % slideCount;
+                showSlide(currentIndex);
+            }
+
+            // تغيير الصورة كل 3 ثواني
+            if(slideCount > 1){
+                setInterval(nextSlide, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
