@@ -99,97 +99,132 @@
 @endpush
 
 @section('content')
-{{--<div class="container ads-page">
-    <form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="row">
-            
-            <!-- السلايدر الأول -->
-            <div class="col-md-4 text-center">
-                <div class="ads-card">
-                    <h5>{{ __('messagess.shop_bannar') }}</h5>
-                    <input type="file" id="slider1" name="shop_bannar" accept="image/*">
-                    <label for="slider1"><i class="fa fa-upload"></i> {{ __('messagess.chose_img') }} </label>
+
+<form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+
+    <!-- HOME SECTION -->
+    <div class="section">
+        <h2>Main Page Banners</h2>
+        <input type="hidden" name="page" value="home">
+        <label class="upload-btn" for="home-input">Upload Banners</label>
+        <input type="file" id="home-input" name="images[]" multiple accept="image/*">
+
+        <div class="image-grid" id="home-grid">
+            @foreach($home as $img)
+                <div class="image-card">
+                    <img src="{{ asset($img->image) }}" alt="Ad Image">
+                    <div class="image-actions">
+                        @if($img->status == 1)
+                            <button class="btn-toggle active">Active</button>
+                        @else
+                            <button class="btn-toggle inactive">Inactive</button>
+                        @endif
+
+                        <form action="{{ route('ads.destroy', $img->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn-delete">Delete</button>
+                        </form>
+                    </div>
                 </div>
-                <img id="preview1" class="preview-img" />
-            </div>
-
-            <!-- السلايدر الثاني -->
-            <div class="col-md-4 text-center">
-                <div class="ads-card">
-                    <h5>{{ __('messagess.service_bannar') }}</h5>
-                    <input type="file" id="slider2" name="serve_bannar" accept="image/*">
-                    <label for="slider2"><i class="fa fa-upload"></i> {{ __('messagess.chose_img') }} </label>
-                </div>
-                <img id="preview2" class="preview-img" />
-            </div>
-
-            <!-- صورة الإعلان المصغرة -->
-            <div class="col-md-4 text-center">
-                <div class="ads-card">
-                    <h5>{{ __('messagess.packages_bannar') }}</h5>
-                    <input type="file" id="thumbnail" name="pack_bannar" accept="image/*">
-                    <label for="thumbnail"><i class="fa fa-upload"></i> {{ __('messagess.chose_img') }} </label>
-                </div>
-                <img id="preview3" class="preview-img" />
-            </div>
-
-        </div>
-
-        <!-- زر الحفظ -->
-        <div class="text-center">
-            <button type="submit" class="save-btn">
-                <i class="fa fa-save"></i> {{ __('messagess.save') }}
-            </button>
-        </div>
-    </form>
-</div>--}}
-<div class="section">
-    <h2>Main Page Banners</h2>
-    <label class="upload-btn" for="banners">Upload Banners</label>
-    <input type="file" id="banners" multiple accept="image/*">
-    
-    <div class="image-grid" id="banners-grid">
-        <!-- Example: صور موجودة من الداتابيز -->
-        <div class="image-card">
-            <img src="banner1.jpg" alt="Banner 1">
-            <div class="image-actions">
-                <button class="btn-toggle">Active</button>
-                <button class="btn-delete">Delete</button>
-            </div>
-        </div>
-        <div class="image-card">
-            <img src="banner2.jpg" alt="Banner 2">
-            <div class="image-actions">
-                <button class="btn-toggle inactive">Inactive</button>
-                <button class="btn-delete">Delete</button>
-            </div>
+            @endforeach
         </div>
     </div>
-</div>
+</form>
 
-<!-- Packages Section -->
+
+<!-- PACKAGES SECTION -->
 <div class="section">
     <h2>Packages Section Images</h2>
-    <label class="upload-btn" for="packages">Upload Packages</label>
-    <input type="file" id="packages" multiple accept="image/*">
+    <label class="upload-btn" for="packages-input">Upload Packages</label>
+    <input type="file" id="packages-input" multiple accept="image/*">
 
     <div class="image-grid" id="packages-grid">
-        <!-- Example images -->
+        @foreach($packages as $pack)
+            <div class="image-card">
+                <img src="{{ asset($pack->image) }}" alt="Ad Image">
+
+                <div class="image-actions">
+                    @if($pack->status == 1)
+                        <button class="btn-toggle active">Active</button>
+                    @else
+                        <button class="btn-toggle inactive">Inactive</button>
+                    @endif
+
+                    <form action="{{ route('ads.destroy', $pack->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn-delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 
-<!-- Services Section -->
+
+<!-- SERVICES SECTION -->
 <div class="section">
     <h2>Services Section Images</h2>
-    <label class="upload-btn" for="services">Upload Services</label>
-    <input type="file" id="services" multiple accept="image/*">
+    <label class="upload-btn" for="services-input">Upload Services</label>
+    <input type="file" id="services-input" multiple accept="image/*">
 
     <div class="image-grid" id="services-grid">
-        <!-- Example images -->
+        @foreach($servises as $serve)
+            <div class="image-card">
+                <img src="{{ asset($serve->image) }}" alt="Ad Image">
+
+                <div class="image-actions">
+                    @if($serve->status == 1)
+                        <button class="btn-toggle active">Active</button>
+                    @else
+                        <button class="btn-toggle inactive">Inactive</button>
+                    @endif
+
+                    <form action="{{ route('ads.destroy', $serve->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn-delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
+
+
+<!-- SHOP SECTION -->
+<div class="section">
+    <h2>Shop Section Images</h2>
+    <label class="upload-btn" for="shop-input">Upload Shop Images</label>
+    <input type="file" id="shop-input" multiple accept="image/*">
+
+    <div class="image-grid" id="shop-grid">
+        @foreach($shop as $item)
+            <div class="image-card">
+                <img src="{{ asset($item->image) }}" alt="Ad Image">
+
+                <div class="image-actions">
+                    @if($item->status == 1)
+                        <button class="btn-toggle active">Active</button>
+                    @else
+                        <button class="btn-toggle inactive">Inactive</button>
+                    @endif
+
+                    <form action="{{ route('ads.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn-delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
 @endsection
+
 
 @push('after-scripts')
 <script>
@@ -209,70 +244,34 @@
                 `;
                 container.appendChild(div);
 
-                // Delete functionality
                 div.querySelector('.btn-delete').addEventListener('click', () => {
                     div.remove();
                 });
 
-                // Toggle functionality
                 const toggleBtn = div.querySelector('.btn-toggle');
                 toggleBtn.addEventListener('click', () => {
                     toggleBtn.classList.toggle('inactive');
-                    if(toggleBtn.classList.contains('inactive')){
-                        toggleBtn.textContent = 'Inactive';
-                    } else {
-                        toggleBtn.textContent = 'Active';
-                    }
+                    toggleBtn.textContent = toggleBtn.classList.contains('inactive') ? 'Inactive' : 'Active';
                 });
             };
             reader.readAsDataURL(file);
         });
     }
 
-    document.getElementById('banners').addEventListener('change', function() {
-        previewImages(this, 'banners-grid');
+    document.getElementById('home-input').addEventListener('change', function() {
+        previewImages(this, 'home-grid');
     });
 
-    document.getElementById('packages').addEventListener('change', function() {
+    document.getElementById('packages-input').addEventListener('change', function() {
         previewImages(this, 'packages-grid');
     });
 
-    document.getElementById('services').addEventListener('change', function() {
+    document.getElementById('services-input').addEventListener('change', function() {
         previewImages(this, 'services-grid');
     });
+
+    document.getElementById('shop-input').addEventListener('change', function() {
+        previewImages(this, 'shop-grid');
+    });
 </script>
-<!-- JS -->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>-->
-<!--<script>-->
-
-<!--    function previewImage(inputId, previewId) {-->
-<!--        const input = document.getElementById(inputId);-->
-<!--        const preview = document.getElementById(previewId);-->
-
-<!--        input.addEventListener("change", function () {-->
-<!--            const file = this.files[0];-->
-<!--            if (file) {-->
-<!--                const reader = new FileReader();-->
-<!--                reader.onload = function (e) {-->
-<!--                    preview.src = e.target.result;-->
-<!--                    preview.style.display = "block";-->
-<!--                };-->
-<!--                reader.readAsDataURL(file);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-
-<!--    previewImage("slider1", "preview1");-->
-<!--    previewImage("slider2", "preview2");-->
-<!--    previewImage("thumbnail", "preview3");-->
-            
-<!--    @if(session('success'))-->
-<!--        toastr.success("{{ session('success') }}");-->
-<!--    @endif-->
-
-<!--    @if(session('error'))-->
-<!--        toastr.error("{{ session('error') }}");-->
-<!--    @endif-->
-<!--</script>-->
 @endpush

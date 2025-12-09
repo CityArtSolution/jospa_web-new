@@ -17,20 +17,31 @@ class AdsController extends Controller
     
     public function store(Request $request){
         $request->validate([
-            'page'  => 'required',
-            'status'  => 'required',
-            'image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'page'   => 'required',
+            'status' => 'required',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $ad = new Ad();
         $ad->page   = $request->page;
         $ad->status = $request->status;
         
-        if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/ads'), $imageName);
-            $ad->image = 'uploads/ads/' . $imageName;
+        if (!file_exists(public_path('uploads/ads'))) {
+            mkdir(public_path('uploads/ads'), 0777, true);
         }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $img) {
+                $imageName = time() . '_' . uniqid() . '.' . $img->extension();
+                $img->move(public_path('uploads/ads'), $imageName);
+                Ad::create([
+                    'page'   => $request->page,
+                    'status' => $request->status,
+                    'image'  => 'uploads/ads/' . $imageName,
+                ]);
+            }
+        }
+
         
         $ad->save();
     
