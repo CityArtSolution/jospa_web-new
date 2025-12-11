@@ -149,7 +149,7 @@
     </style>
         <div class="notify-wrap" aria-live="polite" aria-atomic="true"></div>
     <script>
-    const DURATION_MS = 30000;
+    const DURATION_MS = 5000;
     const wrap = document.querySelector('.notify-wrap');
 
     function createNotify({ title = '', desc = '', autoplay = true } = {}) {
