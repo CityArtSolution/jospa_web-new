@@ -20,24 +20,32 @@
     background-color: rgba(255,255,255,0.2) !important;
     color: #000 !important;
 }
+@media (max-width: 576px) {
+    .gift-desc-responsive {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
 </style>
 <section class="position-relative" style="height: calc(100vh - 200px);">
     <img src="<?php echo e(asset('images/pages/gift-bg.png')); ?>" alt="<?php echo e(__('messagess.background_alt')); ?>" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover; min-height: 500px">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: #f5deb369;"></div>
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: #BF945680;"></div>
 
     <div class="position-relative d-flex flex-column align-items-center justify-content-center text-center px-2 px-md-0" style="font-weight: bold;min-height: 500px; z-index: 3;line-height: 2;">
-        <span class="iconify" data-icon="simple-line-icons:present" data-width="70" data-height="100" style="color:#FFFFFF;margin:0 0 60px 0px"></span>
-        <h2 class="fw-bold mb-3 gift-title-responsive" style="font-size: 3rem;color: rgb(207 146 51)">
+        <span class="iconify" data-icon="simple-line-icons:present" data-width="70" data-height="100" style="color:#FFFFFF;margin:0 0 12px 0px"></span>
+        <h2 class="fw-bold mb-3 gift-title-responsive" style="font-size: 3rem;color: white">
             <?php echo e(__('messagess.gift_line_1')); ?>
 
         </h2>
-        <div class="text-black mb-4 mt-4 gift-desc-responsive" style="font-size: 1.6rem;color: white !important;font-weight: 300;">
-            <?php echo e(__('messagess.gift_line_2')); ?>
+        <div style="width: 41%">
+            <div class="text-black gift-desc-responsive" style="font-size: 1.6rem;color: white !important;font-weight: 400;">
+                <?php echo e(__('messagess.gift_line_2')); ?>
 
-        </div>
-        <div class="text-black mb-4 mt-4 gift-desc-responsive" style="font-size: 1.6rem;color: white !important;font-weight: 300;">
-            <?php echo e(__('messagess.gift_line_3')); ?>
+            </div>
+            <div class="text-black gift-desc-responsive" style="font-size: 1.6rem;color: white !important;font-weight: 400;">
+                <?php echo e(__('messagess.gift_line_3')); ?>
 
+            </div>
         </div>
     </div>
 

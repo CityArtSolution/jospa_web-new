@@ -64,8 +64,14 @@
           line-height:1;
         }
         .notify .desc11{
-          font-size:13px;opacity:0.92;color:rgba(255,255,255,0.92);
-          white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+          font-size:13px;
+          opacity:0.92;
+          color:rgba(255,255,255,0.92);
+          white-space: normal;  
+          overflow: visible;    
+          text-overflow: clip;  
+          word-break: break-word; 
+          line-height: 1.3;
         }
     
         /* زر الغلق */
@@ -143,7 +149,7 @@
     </style>
         <div class="notify-wrap" aria-live="polite" aria-atomic="true"></div>
     <script>
-    const DURATION_MS = 3000;
+    const DURATION_MS = 5000;
     const wrap = document.querySelector('.notify-wrap');
 
     function createNotify({ title = '', desc = '', autoplay = true } = {}) {

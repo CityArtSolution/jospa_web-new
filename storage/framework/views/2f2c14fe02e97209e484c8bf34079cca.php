@@ -6,8 +6,8 @@
   }
 </style>
     <div class="container" style="padding: 0 5rem;">
-
-        <h2 class="mb-5 text-center" style="font-size: 42px;background: linear-gradient(90deg, #CF9233, #212121);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size: 2.5rem; font-weight: bold;">
+      <img src="<?php echo e(asset('images/icons/fl-2.png')); ?>" alt="fl img" style="position: absolute;left: 0;">
+        <h2 class="mb-5 text-center" style="font-size: 42px;background: #BF9456;-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size: 2.5rem; font-weight: bold;">
             <?php echo e(__('messagess.our_premium_packages')); ?>
 
         </h2>

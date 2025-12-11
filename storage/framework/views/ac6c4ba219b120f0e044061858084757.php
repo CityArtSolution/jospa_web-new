@@ -20,6 +20,21 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+        <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        .swiper-pagination-bullet-active {
+            background-color: #BF9456; 
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <?php echo $__env->make('components.frontend.progress-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -28,11 +43,20 @@
 
         <?php echo $__env->make('components.frontend.second-navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
-    <?php if(isset($ad['serve_bannar'])): ?>
-        <div style="display: flex;justify-content: center;align-items: center;width: 100%;margin-top: 37px;">
-            <img style="width: 75%;" src="<?php echo e($ad['serve_bannar']); ?>">
+    <!-- Swiper -->
+    <div class="swiper mySwiper" style="display: flex; justify-content: center; align-items: center; margin-top: 37px;">
+        <div class="swiper-wrapper">
+            <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="swiper-slide" style="display: flex; justify-content: center; align-items: center;">
+                    <img src="<?php echo e(asset($ad->image)); ?>" style="width: 65%; height: 250px; object-fit: cover; border-radius: 8px;">
+                </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-    <?php endif; ?>
+    
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
     <!-- Page Content -->
     <main>
         <?php echo $__env->make('components.frontend.services-section', compact('categories', 'services', 'packages'), \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -44,6 +68,24 @@
     <?php echo $__env->make('components.frontend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            effect: 'fade', // تأثير fade بسيط
+            fadeEffect: {
+                crossFade: true
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true, // النقط قابلة للنقر للتنقل
+            },
+        });
+    </script>
 </body>
 </html>
 <?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\Modules/rontend\Resources/views/services.blade.php ENDPATH**/ ?>

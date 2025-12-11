@@ -18,13 +18,13 @@
     }
     .Category_Name{
         font-size: 20px;
-        font-weight: 200;
+        font-weight: 400 !important;
         color: #BF9456;
     }
     .Category_desc{
         font-size: 16px;
-        font-weight: 200;
-        color: #000000;
+        font-weight: 300 !important;
+        color: #000000 !important;
     }
 </style>
 
@@ -36,7 +36,7 @@
         <h4 class="mt-3 Category_Name"><?php echo e($name ?? 'Category Name'); ?></h4>
         <p class="text-muted Category_desc">
             <?php if(isset($description)): ?>
-                <?php echo e(\Illuminate\Support\Str::limit($description[app()->getLocale()] ?? '', 200)); ?>
+                <?php echo e(\Illuminate\Support\Str::limit($description[app()->getLocale()] ?? '', 90)); ?>
 
             <?php endif; ?>
         </p>
@@ -48,6 +48,7 @@
             <a href="#" class="btn btn-outline-light" style="width: 100%;background:#BF9456;"><?php echo e(__('messagess.details')); ?></a>
         <?php endif; ?>
             <br>
-        <a href="<?php echo e(route('salon.create')); ?>" class="btn btn-outline-light" style="width: 100%;margin-top:10px"><?php echo e(__('messagess.bookNow')); ?></a>
+        <a onclick="selectMainService(<?php echo e($category_id ?? 0); ?>)"  class="btn btn-outline-light" style="border: 1px solid #00000024;width: 100%;margin-top:10px;color: #000000;"><?php echo e(__('messagess.bookNow')); ?></a>
     </div>
-</div><?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/components/frontend/category-card.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/components/frontend/category-card.blade.php ENDPATH**/ ?>

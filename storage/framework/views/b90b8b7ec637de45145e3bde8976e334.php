@@ -33,7 +33,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('<?php echo e(asset('images/footer-bg-spa.jpg')); ?>'); // change image
+    background-image: url("<?php echo e(asset('images/pages/footer.png')); ?>");
     background-size: cover;
     background-position: center;
     z-index: 1;
@@ -45,26 +45,22 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(43, 38, 36, 0.85); /* تظليل داكن أكثر */
+    background: #39260b85;
 }
 
 /* الموجة العلوية */
 .footer-curve-top {
     position: absolute;
-    top: 0;
+    top: -3px;
     left: 0;
     width: 100%;
     height: 150px;
     overflow: hidden;
     line-height: 0;
     z-index: 5;
-    transform: translateY(-99%);
+    rotate: 180deg;
 }
-.footer-curve-top svg {
-    display: block;
-    width: 100%;
-    height: 150px;
-}
+
 .footer-curve-top .shape-fill {
     fill: #f5f5f5; /* لون خلفية الصفحة الرئيسي */
 }
@@ -92,17 +88,16 @@ body {
     margin: 0 0 40px 0;
 }
 .footer-logo {
-    font-family: 'Playfair Display', serif; 
     font-size: 3rem; 
     font-weight: 400;
-    color: #E8D3C4;
+    color: white;
     letter-spacing: 15px; 
     margin-bottom: 5px;
 }
 .footer-logo-exp {
-    font-family: 'Almarai', sans-serif; 
+    : 'Almarai', sans-serif; 
     font-size: 1rem;
-    color: #E8D3C4;
+    color: white;
     font-weight: 300;
     letter-spacing: 2px;
     margin-bottom: 25px;
@@ -110,7 +105,7 @@ body {
 }
 
 .footer-description {
-    color: #bbb;
+    color: white;
     font-size: 1rem;
     line-height: 1.8;
     margin-bottom: 40px;
@@ -132,9 +127,9 @@ body {
     display: flex;
     align-items: center;
     padding: 12px 30px;
-    background-color: #9F8C6D; /* لون ترابي دافئ */
+    background-color: #BF9456; /* لون ترابي دافئ */
     color: #fff;
-    border: 1px solid #9F8C6D;
+    border: 1px solid #BF9456;
     border-radius: 50px;
     text-decoration: none;
     font-size: 1rem;
@@ -145,9 +140,9 @@ body {
 }
 
 .contact-btn:hover {
-    background-color: #E8D3C4;
+    background-color: white;
     color: #4D4541;
-    border-color: #E8D3C4;
+    border-color: white;
     transform: translateY(-2px);
 }
 
@@ -166,9 +161,9 @@ body {
 }
 
 .social-icons-main a {
-    color: #E8D3C4;
+    color: white;
     font-size: 1.1rem;
-    border: 1px solid #E8D3C4;
+    border: 1px solid white;
     border-radius: 8px; /* حواف مربعة قليلاً */
     width: 40px;
     height: 40px;
@@ -179,7 +174,7 @@ body {
 }
 
 .social-icons-main a:hover {
-    background-color: #E8D3C4;
+    background-color: white;
     color: #4D4541;
     transform: scale(1.1);
 }
@@ -187,7 +182,7 @@ body {
 .footer-copyright {
     padding-top: 25px;
     border-top: 1px solid rgba(232, 211, 196, 0.2);
-    color: #E8D3C4;
+    color: white;
     font-size: 0.9rem;
     text-align: center;
     opacity: 0.7;
@@ -199,9 +194,6 @@ body {
         padding-top: 100px;
     }
     .footer-curve-top {
-        height: 100px;
-    }
-    .footer-curve-top svg {
         height: 100px;
     }
     .footer-logo {
@@ -219,14 +211,63 @@ body {
         max-width: 300px;
     }
 }
+.main-design-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* مهم لضمان عدم خروج أي جزء من الشكل */
+}
+
+/* 1. تنسيقات SVG - الانحدار الأبيض */
+.top-curve-svg {
+    position: absolute; 
+    top: 0; /* يبدأ من الأعلى */
+    left: 0;
+    width: 100%;
+    height: 150px; /* تحكم في مدى عمق الانحناء الأبيض */
+    z-index: 2; /* تأكد من ظهوره فوق الخلفية الداكنة */
+}
+
+.top-curve-svg path {
+    fill: #F5F5F5; /* اللون الأبيض للانحدار */
+}
+
+
+/* 2. قسم المحتوى الداكن (الخلفية البنية لصورة المنتجع) */
+.content-section {
+    position: relative;
+    z-index: 1; /* يظهر أسفل SVG الأبيض */
+    width: 100%;
+    min-height: 400px;
+    background-color: #634e3d; /* لون بني داكن */
+    
+    /* صورة افتراضية للخلفية لمحاكاة التصميم الأصلي */
+    background-image: url('https://i.imgur.com/g8d1X9y.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; /* لدمج اللون البني مع الصورة */
+    
+    padding-top: 150px; /* لإنشاء مساحة أسفل SVG الأبيض */
+}
+
+.content-container {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+}
+
 </style>
 
 <footer class="footer-section">
     <div class="footer-background-layer"></div>
 
     <div class="footer-curve-top">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M985.66 92.83C906.67 72 823.75 51.44 743.84 43.41c-82.5-8.31-182.25 18-219.79 38.48-111 61.15-180.71 131.5-220.19 146.43-30.82 11.85-61.94 22.95-101.41 29.86-75.14 13.56-126.92 23.36-196.53 47.04V0h1200Z" class="shape-fill"></path>
+        <svg class="top-curve-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path d="M0,100 C250,10 750,10 1000,100 L1000,100 L0,100 Z" fill="#ffffff" />
         </svg>
     </div>
     
@@ -238,7 +279,7 @@ body {
         </div>
 
         <p class="footer-description">
-             <?php echo e(__('frontend.footer_description')); ?>
+             <?php echo e(__('messagess.footer_description')); ?>
 
         </p>
 
@@ -261,11 +302,6 @@ body {
             <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
         </div>
         
-
-        <div class="footer-copyright">
-             &copy; <?php echo e(date('Y')); ?> JO SPA. All rights reserved.
-        </div>
-
     </div>
 </footer>
 

@@ -88,6 +88,9 @@ Route::get('/test-upload', function () {
         Route::get('tabby/cancel/{invoice}', 'tabbyCancel')->name('tabby.cancel');
     });
 
+    Route::get('/salonService' , [BookingsController::class , 'salon'])->name('salon.create');
+
+    Route::post('/cart', [BookingCartController::class, 'store'])->name('cart.store');
 
     // Sign
     Route::get('/signup', [SignController::class, 'index'])->name('signup');
@@ -108,7 +111,6 @@ Route::get('/test-upload', function () {
 
     Route::post('/import-city', [ServiceController::class, 'import_city'])->name('import.city');// uploude <= موقت هنا
 
-
     Route::middleware('user.auth')->group(function () {
 
 
@@ -124,8 +126,6 @@ Route::get('/test-upload', function () {
 
         Route::get('/details/{id}', [SaloneBookController::class, 'show'])->name('home.details');
 
-    Route::get('/salonService' , [BookingsController::class , 'salon'])->name('salon.create');
-
     Route::post('/gift-cards', [GiftCardController::class, 'store'])->name('gift.create');
 
     Route::get('/success-py-gift', [GiftCardController::class, 'handlePaymentResult']);
@@ -136,8 +136,6 @@ Route::get('/test-upload', function () {
     Route::get('/ads', function () {return view('components.frontend.ads');})->name('ads.page');
 
     Route::get('/cart', [BookingCartController::class, 'index'])->name('cart.page');
-
-    Route::post('/cart', [BookingCartController::class, 'store'])->name('cart.store');
 
     Route::delete('/cart/{id}', [BookingCartController::class, 'destroy'])->name('cart.destroy');
 
@@ -161,6 +159,7 @@ Route::get('/test-upload', function () {
     Route::get('/staff', [HomeBookingController::class, 'index']);
     Route::get('/staff/home', [HomeBookingController::class, 'index_home']);
     Route::get('/branchs/{id}', [HomeBookingController::class, 'branchs']);
+    Route::get('all/branchs/', [HomeBookingController::class, 'allbranchs']);
     Route::post('/bookings', [HomeBookingController::class, 'store'])->name('bookings.store');
     Route::get('/cart/add/{id}', [BookingCartController::class, 'addToCart'])->name('cart.add');
 

@@ -175,7 +175,7 @@
 
 <section class="py-5">
     <div class="container"  style="padding: 0 5rem;">
-        <h2 class="mb-5 mt-3 text-center" style="font-size: 42px;background: linear-gradient(90deg, #CF9233, #212121);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: bold;">
+        <h2 class="mb-5 mt-3 text-center" style="font-size: 42px;background: #BF9456;-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-weight: bold;">
             {{ __('messagess.3naya_product') }}
         </h2>
         @if(isset($products) && $products->count() > 0)

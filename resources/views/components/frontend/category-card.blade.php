@@ -18,13 +18,13 @@
     }
     .Category_Name{
         font-size: 20px;
-        font-weight: 200;
+        font-weight: 400 !important;
         color: #BF9456;
     }
     .Category_desc{
         font-size: 16px;
-        font-weight: 200;
-        color: #000000;
+        font-weight: 300 !important;
+        color: #000000 !important;
     }
 </style>
 
@@ -36,7 +36,7 @@
         <h4 class="mt-3 Category_Name">{{ $name ?? 'Category Name' }}</h4>
         <p class="text-muted Category_desc">
             @if(isset($description))
-                {{ \Illuminate\Support\Str::limit($description[app()->getLocale()] ?? '', 200) }}
+                {{ \Illuminate\Support\Str::limit($description[app()->getLocale()] ?? '', 90) }}
             @endif
         </p>
     </div>
@@ -47,6 +47,6 @@
             <a href="#" class="btn btn-outline-light" style="width: 100%;background:#BF9456;">{{ __('messagess.details') }}</a>
         @endif
             <br>
-        <a href="{{route('salon.create')}}" class="btn btn-outline-light" style="width: 100%;margin-top:10px">{{ __('messagess.bookNow') }}</a>
+        <a onclick="selectMainService({{ $category_id ?? 0 }})"  class="btn btn-outline-light" style="border: 1px solid #00000024;width: 100%;margin-top:10px;color: #000000;">{{ __('messagess.bookNow') }}</a>
     </div>
 </div>

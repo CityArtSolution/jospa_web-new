@@ -1,3 +1,8 @@
+<?php
+    use App\Models\Ad;
+    $ads = Ad::where('page' , 'home')->where('status', 1)->get();
+
+?>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 <style>
@@ -114,6 +119,21 @@
         left: 0;
         border-radius: 230px;
     }
+    @media (max-width: 576px) {
+        .slider img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            display: none;
+            position: absolute;
+            top: 133px;
+            left: 0;
+            border-radius: 230px;
+        }
+        .first-sec h1 {
+            margin-bottom: 7px;
+        }
+    }
 
     .slider img.active {
         display: block;
@@ -174,15 +194,18 @@
             </div>
         </div>
         <div class="second-sec">
-            <div class="slider">
-                <img src="images/pages/main-bg.png" class="active" alt="">
-                <img src="images/pages/main-bg.png" alt="">
-                <img src="images/pages/main-bg.png" alt="">
-            </div>
+            <?php if(!empty($ads)): ?>
+                <div class="slider">
+                    <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <img src="<?php echo e(asset($item->image)); ?>" class="<?php echo e($key == 0 ? 'active' : ''); ?>" alt="Package Image">
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            <?php endif; ?>
+            
             <div class="pagination">
-                <span class="active"></span>
-                <span></span>
-                <span></span>
+                <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <span class="<?php echo e($key == 0 ? 'active' : ''); ?>"></span>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" class="{{ app()->getLocale() }}">
+<html dir="<?php echo e(app()->getLocale() == 'ar' ? 'rtl' : 'ltr'); ?>" class="<?php echo e(app()->getLocale()); ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('messagess.booking_system') }}</title>
-    <link rel="stylesheet" href="{{ mix('css/backend.css') }}">
-    @if (language_direction() == 'rtl')
-        <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
-    @endif
+    <title><?php echo e(__('messagess.booking_system')); ?></title>
+    <link rel="stylesheet" href="<?php echo e(mix('css/backend.css')); ?>">
+    <?php if(language_direction() == 'rtl'): ?>
+        <link rel="stylesheet" href="<?php echo e(asset('css/rtl.css')); ?>">
+    <?php endif; ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
 
@@ -1128,10 +1128,10 @@
         </style>
 </head>
 
-<body dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" class="{{ app()->getLocale() }}">
+<body dir="<?php echo e(app()->getLocale() == 'ar' ? 'rtl' : 'ltr'); ?>" class="<?php echo e(app()->getLocale()); ?>">
     <div class="position-relative" style="height: 17vh;">
-        @include('components.frontend.second-navbar')
-        @include('components.frontend.notifications')
+        <?php echo $__env->make('components.frontend.second-navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('components.frontend.notifications', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
     <!-- Main Container -->
     <div class="container">
@@ -1157,7 +1157,7 @@
             <!-- Progress Bar -->
             <div class="progress-bar">
                 <div class="progress-step active" data-progress-step="1">
-                    <img style="width: 29px;" src="{{asset('images/icons/home.png')}}">
+                    <img style="width: 29px;" src="<?php echo e(asset('images/icons/home.png')); ?>">
                 </div>
                 <div class="line"></div>
                 <div class="progress-step" data-progress-step="2">
@@ -1180,12 +1180,12 @@
             <div id="step1" class="step-content">
                 <div class="location-form">
                     <div class="form-group">
-                        <label class="top-label"> {{ __('messagess.select_branch') }} </label>
+                        <label class="top-label"> <?php echo e(__('messagess.select_branch')); ?> </label>
                         <br>
                         <select class="w-100-mob" name="State">
-                            @foreach($States as $State)
-                            <option value="{{$State->id}}">{{$State->name}}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $States; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $State): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($State->id); ?>"><?php echo e($State->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                         <div class="branch-cards">
                             
@@ -1195,7 +1195,7 @@
             </div>
             <!-- Step 2: Service & massage -->
             <div id="step2" class="step-content hidden">
-                <label class="top-label" style="width: 58%;margin: auto;"> {{ __('messagess.select_service_to_book') }} </label>
+                <label class="top-label" style="width: 58%;margin: auto;"> <?php echo e(__('messagess.select_service_to_book')); ?> </label>
                 <br>
                 <div class="service-grid">
 
@@ -1207,7 +1207,7 @@
             </div>
             <!-- Step 3: Staff Selection -->
             <div id="step3" class="step-content hidden">
-                <label class="top-label" style="width: 58%;margin: auto;"> {{ __('messagess.select_service_provider') }} </label>
+                <label class="top-label" style="width: 58%;margin: auto;"> <?php echo e(__('messagess.select_service_provider')); ?> </label>
                 <br>
                 <div class="sammary-steps"></div>
                 <div id="staffGrid" class="staff-grid">
@@ -1216,15 +1216,15 @@
             </div>
             <!-- Step 4: Date & Time Selection -->
             <div id="step4" class="step-content hidden">
-                <label class="top-label" style="width: 58%;margin: auto;"> {{ __('messagess.select_time_and_date_for_services') }} </label>
+                <label class="top-label" style="width: 58%;margin: auto;"> <?php echo e(__('messagess.select_time_and_date_for_services')); ?> </label>
                 <div class="sammary-steps" style="margin: 40px 0;"></div>
                 <div class="Date-Time-Mob" style="display: flex;justify-content: space-between;">
                     <div class="calen">
-                        <label class="sub-label"> {{ __('messagess.select_preferred_day') }} </label>
+                        <label class="sub-label"> <?php echo e(__('messagess.select_preferred_day')); ?> </label>
                         <div class="calendar">
                             <div class="calendar-header">
                                 <button class="calendar-nav" id="prevMonth">‹</button>
-                                <div class="calendar-title" id="calendarTitle">{{ __('messagess.month_title') }}</div>
+                                <div class="calendar-title" id="calendarTitle"><?php echo e(__('messagess.month_title')); ?></div>
                                 <button class="calendar-nav" id="nextMonth">›</button>
                             </div>
                             <div style="overflow: auto;">
@@ -1235,19 +1235,19 @@
                         </div>
                     </div>
                     <div class="times">
-                        <label class="sub-label"> {{ __('messagess.select_preferred_time') }} </label>
+                        <label class="sub-label"> <?php echo e(__('messagess.select_preferred_time')); ?> </label>
                         <div class="time-slots">
                             <div class="time-period">
                                 <div class="time-toggle">
-                                  <button id="morningBtn" class="active">{{ __('messagess.morning') }}</button>
-                                  <button id="eveningBtn">{{ __('messagess.afternoon') }}</button>
+                                  <button id="morningBtn" class="active"><?php echo e(__('messagess.morning')); ?></button>
+                                  <button id="eveningBtn"><?php echo e(__('messagess.afternoon')); ?></button>
                                 </div>
-                                {{-- قبل الظهر --}}
+                                
                                 <div class="time-section" id="morning-section">
                                     <div class="time-grid" id="morning-grid"></div>
                                 </div>
     
-                                {{-- بعد الظهر --}}
+                                
                                 <div class="time-section mt-4" id="afternoon-section">
                                     <div class="time-grid" id="afternoon-grid"></div>
                                 </div>
@@ -1268,16 +1268,16 @@
             </div>
             <!-- Navigation -->
             <div class="navigation">
-                <button class="btn btn-secondary" id="prevBtn" disabled>{{ __('messagess.previous') }}</button>
-                <button class="btn btn-primary" id="nextBtn">{{ __('messagess.next') }}</button>
+                <button class="btn btn-secondary" id="prevBtn" disabled><?php echo e(__('messagess.previous')); ?></button>
+                <button class="btn btn-primary" id="nextBtn"><?php echo e(__('messagess.next')); ?></button>
             </div>
         </div>
     </div>
     <div class="position-relative" style="height: 17vh;"></div>
     <!-- Footer -->
-    @include('components.frontend.footer')
+    <?php echo $__env->make('components.frontend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <script>
-        const translations = { next: "{{ __('messagess.next') }}", complete: "{{ __('messagess.complete') }}"};
+        const translations = { next: "<?php echo e(__('messagess.next')); ?>", complete: "<?php echo e(__('messagess.complete')); ?>"};
         
         // Application State
         let currentStep = 1;
@@ -1299,7 +1299,7 @@
         const progressSteps = document.querySelectorAll('.progress-step');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const currentLang = "{{ app()->getLocale() }}";
+        const currentLang = "<?php echo e(app()->getLocale()); ?>";
         let activeSubId = null;
         let activeStaffId = null;
 
@@ -1740,30 +1740,30 @@
         
             // Update calendar title
             const months = [
-                '{{ __("messagess.january") }}',
-                '{{ __("messagess.february") }}',
-                '{{ __("messagess.march") }}',
-                '{{ __("messagess.april") }}',
-                '{{ __("messagess.may") }}',
-                '{{ __("messagess.june") }}',
-                '{{ __("messagess.july") }}',
-                '{{ __("messagess.august") }}',
-                '{{ __("messagess.september") }}',
-                '{{ __("messagess.october") }}',
-                '{{ __("messagess.november") }}',
-                '{{ __("messagess.december") }}'
+                '<?php echo e(__("messagess.january")); ?>',
+                '<?php echo e(__("messagess.february")); ?>',
+                '<?php echo e(__("messagess.march")); ?>',
+                '<?php echo e(__("messagess.april")); ?>',
+                '<?php echo e(__("messagess.may")); ?>',
+                '<?php echo e(__("messagess.june")); ?>',
+                '<?php echo e(__("messagess.july")); ?>',
+                '<?php echo e(__("messagess.august")); ?>',
+                '<?php echo e(__("messagess.september")); ?>',
+                '<?php echo e(__("messagess.october")); ?>',
+                '<?php echo e(__("messagess.november")); ?>',
+                '<?php echo e(__("messagess.december")); ?>'
             ];
             document.getElementById('calendarTitle').textContent = `${months[month]} ${year}`;
         
             // Days of week names
             const weekDays = [
-                '{{ __("messagess.sunday") }}',
-                '{{ __("messagess.monday") }}',
-                '{{ __("messagess.tuesday") }}',
-                '{{ __("messagess.wednesday") }}',
-                '{{ __("messagess.thursday") }}',
-                '{{ __("messagess.friday") }}',
-                '{{ __("messagess.saturday") }}'
+                '<?php echo e(__("messagess.sunday")); ?>',
+                '<?php echo e(__("messagess.monday")); ?>',
+                '<?php echo e(__("messagess.tuesday")); ?>',
+                '<?php echo e(__("messagess.wednesday")); ?>',
+                '<?php echo e(__("messagess.thursday")); ?>',
+                '<?php echo e(__("messagess.friday")); ?>',
+                '<?php echo e(__("messagess.saturday")); ?>'
             ];
         
             // Generate calendar days
@@ -1999,7 +1999,7 @@
                 case 1:
                     const selectedBranch = document.querySelector('input[name="branch"]:checked');
                     if (!selectedBranch) {
-                        alert('{{ __("messagess.please_select_branch") }}');
+                        alert('<?php echo e(__("messagess.please_select_branch")); ?>');
                         return false;
                     }
                     break;
@@ -2051,16 +2051,16 @@
                         </div>
                         <div class="sammary-steps"></div>
                         <div class="total-sunmary">
-                            ${lang === 'ar' ? 'اجمالي المبلغ المالي :' : 'Total amount of money:'}      <span class="sub-sammary-total">${fanaltotal} {{ __('messages.currency') }}</span>
+                            ${lang === 'ar' ? 'اجمالي المبلغ المالي :' : 'Total amount of money:'}      <span class="sub-sammary-total">${fanaltotal} <?php echo e(__('messages.currency')); ?></span>
                         </div>
                             <div class="ti">
-                                <label style="text-align: center;font-size: 18px;font-weight: 600;color: #979797;">{{ __('messagess.products_you_may_like') }}</label>
+                                <label style="text-align: center;font-size: 18px;font-weight: 600;color: #979797;"><?php echo e(__('messagess.products_you_may_like')); ?></label>
                             </div>
-                            @if(isset($suggest) && $suggest->count() > 0)
+                            <?php if(isset($suggest) && $suggest->count() > 0): ?>
                             <div class="row g-4">
-                                @foreach($suggest as $index => $product)
-                                    <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                                        @include('components.frontend.products-card', [
+                                <?php $__currentLoopData = $suggest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<?php echo e($index * 100); ?>">
+                                        <?php echo $__env->make('components.frontend.products-card', [
                                             'image' => $product->av2,
                                             'name' => $product->name,
                                             'des' => $product->short_description,
@@ -2068,19 +2068,19 @@
                                             'categories' => $product->categories,
                                             'min_price' => $product->min_price,
                                             'max_price' => $product->max_price,
-                                        ])
+                                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
-                            @endif
+                            <?php endif; ?>
                             <div class="two-btn">
                             
                                 <button class=" dis-btn btn-e btn-filled" onclick="completeBooking('payment')">
                                      ${lang === 'ar' ? 'ادفع الآن' : 'Pay now :'}      
-                                     <img src="{{asset('images/icons/vesa.png')}}">
+                                     <img src="<?php echo e(asset('images/icons/vesa.png')); ?>">
                                 </button>
                                 <button class=" dis-btn btn-e btn-outline" onclick="completeBooking('cart')">
-                                    <img class="mdi-lightcart" src="{{ asset('images/icons/mdi-light-cart.svg') }}" alt="mdi-light:cart">
+                                    <img class="mdi-lightcart" src="<?php echo e(asset('images/icons/mdi-light-cart.svg')); ?>" alt="mdi-light:cart">
                                      ${lang === 'ar' ? 'اضافة للسلة' : 'Add to cart'}      
                                 </button>
                                 
@@ -2140,6 +2140,7 @@
         }
         // Initialize the application
         document.addEventListener('DOMContentLoaded', initializeApp);
+                    createNotify({ title: 'تمت العمؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤؤلية بنجاح', desc: "ييمنرويورينري"  });
     
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -2147,3 +2148,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/salon/create.blade.php ENDPATH**/ ?>

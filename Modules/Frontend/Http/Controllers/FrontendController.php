@@ -196,7 +196,7 @@ class FrontendController extends Controller
             }])
             ->get();
 
-        return view('frontend::category-details', compact('category', 'relatedCategories' , 'allCat'));
+        return view('frontend::category-details', compact('category', 'relatedCategories' , 'allCat' , 'id'));
     }
 
     /**

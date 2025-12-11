@@ -8,7 +8,7 @@
     <img src="<?php echo e($image ?? asset('images/pages/main-bg.png')); ?>" alt="<?php echo e($name ?? 'Package'); ?>" class="w-100 h-100" style="object-fit: cover;">
     <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.0) 100%);"></div>
     <!-- Package info -->
-    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: rgba(0, 0, 0, 0.4);height: 41%;">
+    <div class="position-absolute bottom-0 start-0 w-100 p-3" style="height: 41%;">
       <div class="text-white h3 fw-bold" style="color: #BF9456;white-space: nowrap;margin-bottom: 16px;"><?php echo e($name ?? 'Package Name'); ?></div>
       <p class="text-white h6" style="white-space: nowrap;font-size: initial;font-weight: 200;"><?php echo e($description ?? 'Package Description'); ?></p>
       <div class="d-flex justify-content-between align-items-center mt-2" style="font-size: 16px;">

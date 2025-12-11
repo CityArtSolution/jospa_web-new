@@ -14,6 +14,7 @@ use Modules\Booking\Models\Booking;
 use App\Models\LoyaltyPoint;
 use App\Models\reject;
 use Modules\Promotion\Models\Coupon;
+use Modules\Booking\Models\BookingService;
 
 
 class SignController extends Controller
@@ -68,21 +69,23 @@ class SignController extends Controller
             'username' => 'required|string|max:191',
             'mobile'   => 'required|string|max:20',
         ]);
-        
-        $user = \App\Models\User::where('username', $data['username'])
-                    ->where('mobile', $data['mobile'])
-                    ->first();
+        $user = \App\Models\User::where('username', $data['username'])->where('mobile', $data['mobile'])->first();
     
         if ($user) {
             Auth::login($user);
             $request->session()->regenerate();
-    
-            // if (! $user->hasVerifiedEmail()) {
-            //     Auth::logout();
-            //     return redirect()->route('verification.notice')
-            //         ->with('warning', 'يجب تأكيد بريدك الإلكتروني أولاً.');
-            // }
-    
+                if ($request->session()->has('temp_booking')) {
+                    $temp = $request->session()->get('temp_booking');
+                    $data = $temp['data'];
+                    $btn_value = $temp['btn_value'];
+                    $this->complateTempBookings($data,$btn_value);
+                    session()->forget('temp_booking');
+                    if ($btn_value == 'cart') {
+                        return redirect()->to('/cart')->with('success', 'تم تحويل الحجز بنجاح');
+                    } elseif ($btn_value == 'payment') {
+                        return redirect()->to('/payment?ids=1')->with('success', 'تم تحويل الحجز بنجاح');
+                    }
+                }
             return redirect()->to('/')->with('success', __('messages.login_successfully'));
         }
     
@@ -93,13 +96,12 @@ class SignController extends Controller
     
     public function profile()
     {
-        $today = now()->toDateString();
         
         $baseQuery = Booking::with('service.service', 'service.employee')->whereHas('service')->where('created_by', auth()->user()->id)->whereNull('deleted_by');
         
-        $pending = (clone $baseQuery)->where('status', '!=', 'completed')->whereNull('deleted_by')->whereDate('created_at', '>=', $today)->count();
+        $pending = (clone $baseQuery)->where('status', '!=', 'completed')->whereNull('deleted_by')->count();
         
-        $completed = (clone $baseQuery)->where('payment_status', 1)->where('status', 'completed')->whereDate('created_at', '<=', $today)->count();
+        $completed = (clone $baseQuery)->where('payment_status', 1)->where('status', 'completed')->count();
 
         $coupons = Coupon::with('promotion')->where('is_expired', 0)->where('use_limit', '>=', 1)->count();    
 
@@ -172,7 +174,6 @@ class SignController extends Controller
     {
     $reasons = reject::all();
     
-    $today = now()->toDateString();
 
     $bookings = Booking::with('service.service','service.employee')->where('created_by', auth()->user()->id)->whereNull('deleted_by')->where('status', '!=', 'completed')->get();
 
@@ -201,9 +202,7 @@ class SignController extends Controller
     
     public function complateBookings()
     {
-        
-    $today = now()->toDateString();
-
+    
     $bookings = Booking::with('service.service' ,'service.employee')->where('created_by', auth()->user()->id)->whereNull('deleted_by')->where('payment_status', 1)->where('status', '=', 'completed')->get();
 
     return view('components.frontend.auth.complate-bookings', compact('bookings'));
@@ -244,6 +243,52 @@ class SignController extends Controller
             'message' => 'User registered successfully',
             'user' => $user
         ], 201);
+    }
+    private function complateTempBookings($data,$btn_value){
+        $user = auth()->user();
+        if (!empty($data['services'])) {
+            foreach ($data['services'] as $service) {
+                if (!empty($service['subServices'])) {
+                    foreach ($service['subServices'] as $sub) {
+                        $subId = $sub['id'];
+                        $date = $sub['date'];
+                        $time = $sub['time'];
+                        $duration = $sub['duration'];
+                        $price = $sub['price'];
+                        $staffId = $sub['staffId'];
+                        $startDateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $date . ' ' . $time);
+                        
+                        $booking = new Booking();
+                        $booking->note = 'العميل: ' . $user->first_name . '، الجوال: ' .  $user->mobile . '، الخدمة: ' . $subId;
+                        $booking->start_date_time = $startDateTime;
+                        $booking->user_id         = $user->id;
+                        $booking->branch_id       = $data['branch'] ?? 1;
+                        $booking->created_by      = $user->id;
+                        $booking->status          = 'pending';
+                        $booking->location       =  null;
+                        $booking->payment_type       =  $btn_value;
+                        $booking->save();
+                        
+                        //  الحجز التاني
+                        $bookingService = new BookingService();
+                        $bookingService->booking_id       = $booking->id;
+                        $bookingService->service_id       = $subId;
+                        $bookingService->employee_id      = $staffId;
+                        $bookingService->start_date_time  = $startDateTime;
+                        $bookingService->service_price    = \Modules\Service\Models\Service::find($subId)->default_price ?? 0;
+                        $bookingService->duration_min     = $duration;
+                        $bookingService->sequance         = 1;
+                        $bookingService->created_by      = $user->id;
+                        $bookingService->save();
+
+                        $loyalty = \App\Models\LoyaltyPoint::firstOrCreate(
+                            ['user_id' => $user->id],
+                            ['points' => 0]
+                        );
+                    }
+                }
+            }
+        }
     }
 }
 

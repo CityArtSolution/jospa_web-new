@@ -75,7 +75,7 @@
                 delay: 3000,
                 disableOnInteraction: false,
             },
-            effect: 'fade', // تأثير fade بسيط
+            effect: 'fade',
             fadeEffect: {
                 crossFade: true
             },

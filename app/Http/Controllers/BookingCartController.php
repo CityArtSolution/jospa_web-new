@@ -66,12 +66,18 @@ class BookingCartController extends Controller
         $data = $request->all();
         $btn_value = $request->btn_value;
         $branch = $data['branch'];
-            if (!$user) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'يرجى تسجيل الدخول أولاً.'
-                ], 401);
-            }
+        if (!$user) {
+            session()->put('temp_booking', [
+                'data' => $data,
+                'btn_value' => $btn_value,
+                'created_at' => now(),
+            ]);
+            return response()->json([
+                'success' => false,
+                'need_login' => true,
+                'message' => 'يرجى تسجيل الدخول لإكمال الحجز.'
+            ], 200);
+        }
             if (!empty($data['services'])) {
                 foreach ($data['services'] as $service) {
                     if (!empty($service['subServices'])) {

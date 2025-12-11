@@ -29,12 +29,18 @@ class HomeBookingController extends Controller
 
 public function branchs($id)
 {
-    $branches = Branch::whereHas('address', function ($query) use ($id) {
+    $branches = Branch::where('status' ,  1)->whereHas('address', function ($query) use ($id) {
         $query->where('state', $id);
     })
     ->with('address.state_data')
-    ->select('id', 'name','description')
     ->get();
+
+    return response()->json($branches);
+}
+
+public function allbranchs()
+{
+    $branches = Branch::where('status' ,  1)->get();
 
     return response()->json($branches);
 }

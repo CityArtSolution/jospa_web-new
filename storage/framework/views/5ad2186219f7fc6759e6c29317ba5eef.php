@@ -109,29 +109,6 @@
     <script src="<?php echo e(mix('js/backend.js')); ?>"></script>
     <script src="<?php echo e(mix('js/app.js')); ?>"></script>
     <?php echo $__env->yieldPushContent('after-scripts'); ?>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-          fetch('/finalize-booking', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            },
-            credentials: 'include',
-          })
-          .then(res => res.json())
-          .then(data => {
-            if (data.success) {
-              alert('تم تحويل الحجز المؤقت إلى حجز نهائي');
-              window.location.href = `/cart`;
-            }
-            else if (data.error) {
-            }
-          })
-          .catch(err => console.error('خطأ في تحويل الحجز:', err));
-    });
-
-</script>
 </body>
 
 </html>

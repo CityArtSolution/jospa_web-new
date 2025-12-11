@@ -1,0 +1,151 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+.product-card {
+  width: 320px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: 0.3s ease;
+  font-family: 'Zain', sans-serif;
+}
+
+.product-card:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.product-image {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.category {
+  color: #999;
+  font-size: 14px;
+  margin: 0;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px 0;
+  color: #333;
+}
+
+.product-title span {
+  font-weight: bold;
+}
+
+.rating {
+  color: #f7c948; /* نجوم باللون الذهبي */
+  font-size: 14px;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d19d00;
+}
+
+.add-to-cart {
+    background: #d19d00;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 28px;
+    cursor: pointer;
+    display: flex;
+    width: 63%;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.add-to-cart:hover {
+  background: #b8860b;
+}
+
+</style>
+<div class="product-card">
+  <!-- صورة المنتج -->
+  <div class="product-image">
+    <img src="<?php echo e($image ?? asset('images/frontend/Rectangle 42615.png')); ?>" alt="$name">
+  </div>
+
+  <!-- محتوى المنتج -->
+  <div class="product-content">
+    <p class="category">
+        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php echo e($category->name); ?>
+
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </p>
+    <a href="<?php echo e(route('frontend.product.details' , $product_id)); ?>">
+        <h3 class="product-title"><?php echo e($name); ?></h3>
+    </a>
+
+    <!-- التقييم -->
+    <div class="rating">
+      ★★★★★
+    </div>
+
+    <p class="description">
+        <?php echo e($des); ?>
+
+    </p>
+
+    <!-- السعر + زر -->
+    <div class="bottom">
+      <span class="price"><?php echo e($max_price); ?> <?php echo e(__('messagess.SAR')); ?></span>
+<?php if(auth()->guard()->check()): ?>
+      <button class="add-to-cart" onclick='addtocart(<?php echo e($product_id); ?>)'>
+        <span style="font-weight: bold;width: 100%;">
+            <?php echo e(__('messagess.add_to_cart')); ?>
+
+        </span>
+      </button>
+<?php endif; ?>
+<?php if(auth()->guard()->guest()): ?>
+      <button class="add-to-cart" onclick='shownav()'>
+        <span style="font-weight: bold;width: 100%;">
+            <?php echo e(__('messagess.add_to_cart')); ?>
+
+        </span>
+      </button>
+<?php endif; ?>
+    </div>
+  </div>
+</div>
+<?php /**PATH C:\Users\VIP\Desktop\jospa.v.4\jospa_web-new\resources\views/components/frontend/products-card.blade.php ENDPATH**/ ?>
