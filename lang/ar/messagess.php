@@ -1,6 +1,8 @@
 <?php   
 
 return [ 
+    'select_preferred_day' => 'اختر اليوم المفضل',
+    'select_preferred_time' => 'اختر الوقت المفضل',
     'main_page_banners'        => 'بنرات الصفحة الرئيسية',
     'packages_section_images'  => 'صور قسم الباقات',
     'upload_packages'          => 'رفع صور الباقات',

@@ -91,9 +91,13 @@ class BookingCartController extends Controller
                             $startDateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $date . ' ' . $time);
                             
                             $booking = new Booking();
-                            $booking->note = 'العميل: ' . $user->first_name .
-                                '، الجوال: ' .  $user->mobile .
-                                '، الخدمة: ' . $subId;
+                            if($data['branch'] != 0){
+                                $booking->note = 'العميل: ' . $user->first_name .
+                                    '، الجوال: ' .  $user->mobile .
+                                    '، الخدمة: ' . $subId;
+                            }else{
+                                $booking->note =  'حجز منزلي' . 'العميل: ' . $user->first_name . '، الجوال: ' .  $user->mobile . '، الخدمة: ' . $subId;
+                            }
                             $booking->start_date_time = $startDateTime;
                             $booking->user_id         = $user->id;
                             $booking->branch_id       = $data['branch'] ?? 1;

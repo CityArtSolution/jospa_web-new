@@ -177,6 +177,224 @@
         border-color: #CF9233;
     }
   </style>
+            <?php if(request()->has('ids')): ?>
+        <style>
+            /* wrapper */
+            .cart-wrapper {
+                position: fixed;
+                z-index: 999;
+                right: 47px;
+            }
+
+            /* main cart */
+            .cart {
+                width: 70px;
+                height: 70px;
+                background: #bf9456;
+                color: #fff;
+                border-radius: 50%;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                transition:
+                    width 0.6s ease,
+                    height 0.6s ease,
+                    border-radius 0.6s ease,
+                    transform 0.6s ease;
+            }
+
+            /* rotation + scale */
+            .cart.open {
+                width: 320px;
+                height: 360px;
+                border-radius: 20px;
+                transform: rotate(360deg) scale(1.05);
+            }
+
+            /* icon */
+            .cart-icon {
+                display: flex;
+                font-size: 28px;
+                transition: opacity 0.3s ease;
+            }
+
+            /* hide icon */
+            .cart.open .cart-icon {
+                opacity: 0;
+            }
+
+            /* content */
+            .cart-content {
+                position: absolute;
+                inset: 0;
+                padding: 20px;
+                opacity: 0;
+                transform: scale(0.9);
+                transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s;
+            }
+
+            /* show content */
+            .cart.open .cart-content {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* title */
+            .cart-content h4 {
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+            .product {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px;
+                background: white;
+                color: black;
+                border-radius: 14px;
+                margin-bottom: 12px;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+
+            .product:hover {
+                background: #c6c3c3;
+                transform: translateY(-2px);
+            }
+
+            /* left side */
+            .product-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            /* image */
+            .thumb {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                overflow: hidden;
+                background: white;
+            }
+
+            .thumb img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* text */
+            .details {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .details .name {
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .details .price {
+                font-size: 12px;
+                color: #aaa;
+            }
+
+            /* remove button */
+            .remove {
+                background: #ff5a5a;
+                color: #fff;
+                width: 34px;
+                border: none;
+                height: 34px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+
+            .remove:hover {
+                transform: scale(1.1);
+            }
+
+
+        </style>
+                <div class="cart-wrapper">
+                    <div class="cart" id="cart">
+                        <div class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+
+                        <div class="cart-content">
+                            <div class="d-flex" style="justify-content: space-between;">
+                                <h4>خدماتك </h4>
+                                <button class="remove_main" style="border: none;background: #ffffff00;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                            <div id="products-container"></div>
+                        </div>
+                    </div>
+                </div>
+            <script>
+                const cart = document.getElementById('cart');
+                const productsContainer = document.getElementById('products-container');
+                cart.addEventListener('click', () => {
+                    cart.classList.toggle('open');
+                });
+                fetch('/qu/cart')
+                .then(res => res.json())
+                .then(cartItems => {
+                    productsContainer.innerHTML = '';
+                    cartItems.forEach(item => {
+                        const service = item.service.service;
+                        const employee = item.service.employee;
+                        const serviceName = service.name.ar; 
+                        const servicePrice = item.service.service_price;
+                        const serviceImage = service.feature_image ?? 'https://via.placeholder.com/40';
+                        const productDiv = document.createElement('div');
+                        productDiv.classList.add('product');
+                        productDiv.innerHTML = `
+                            <div class="product-info">
+                                <div class="thumb">
+                                    <img src="${serviceImage}" alt="${serviceName}">
+                                </div>
+                                <div class="details">
+                                    <span class="name">${serviceName}</span>
+                                    <span class="price">${servicePrice}ر.س</span>
+                                </div>
+                            </div>
+                            <button onclick="deleteItem(${item.id}, event)" class="remove">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        `;
+                        productsContainer.appendChild(productDiv);
+                    });
+                })
+                .catch(err => console.log(err));
+                    function deleteItem(id, event) {
+                        event.stopPropagation(); 
+                        fetch(`/qu/cart/remove/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert('حدث خطأ أثناء الحذف');
+                            }
+                        })
+                        .catch(err => console.log(err));
+                    }
+
+            </script>
+            <?php endif; ?>
   <form action="<?php echo e(route('payment-chanal')); ?>" method="POST">
     <?php echo csrf_field(); ?>
     <div class="page-wrap">
@@ -278,15 +496,7 @@
                         </div>
                         <div class="flex-fill muted"> <?php echo e(__('messagess.use_wallet')); ?> </div>
                     </div>
-                    
-                    <!-- METHOD: cash -->
-                    <div class="method d-flex" style="gap: 20px;" data-method="cash" tabindex="0">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="paymentMethod" value="cash">
-                        </div>
-                        <div class="flex-fill muted"> <?php echo e(__('messagess.cash_on_delivery')); ?> </div>
-                    </div>
-                
+
                 </div>
             </div>
             <?php if(request()->has('ids')): ?>

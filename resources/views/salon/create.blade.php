@@ -1541,7 +1541,7 @@
                         fetchServicesByGroup(service.id);
                     });
                         serviceGrid.appendChild(card);
-                        if(mainServiceId && parseInt(mainServiceId) === service.id){
+                        if(mainServiceId && parseInt(mainServiceId) == service.id){
                             card.click();
                         }
                     });
@@ -1658,7 +1658,7 @@
                             }
                         });
                         massageContainer.appendChild(card);
-                        if(subServiceId && parseInt(subServiceId) === service.id){
+                        if(subServiceId && parseInt(subServiceId) == service.id){
                             card.click();
                         }
                     });
@@ -2113,7 +2113,7 @@
                     btn.style.cursor = 'not-allowed';
                 });
 
-                if (data.need_login === true) {
+                if (data.need_login == true) {
                     createNotify({ title: 'تم تحويل الحجز إلى حجز مؤقت', desc: 'برجاء تسجيل الدخول لتحويل الحجز إلى حجز دائم'
                     });
                     setTimeout(() => {
@@ -2127,7 +2127,7 @@
                         window.location.href = '/cart'; 
                       }, 3000);
                 }
-                if(btn == 'payment'){
+                if(btn == 'payment' && !data.need_login){
                       setTimeout(() => {
                         window.location.href = '/payment?ids=1'; 
                       }, 1500);

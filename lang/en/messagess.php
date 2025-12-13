@@ -1,5 +1,7 @@
 <?php
 return [
+    'select_preferred_day' => 'Select your preferred day',
+    'select_preferred_time' => 'Select your preferred time',
     'main_page_banners'        => 'Main Page Banners',
     'packages_section_images'  => 'Packages Section Images',
     'upload_packages'          => 'Upload Packages',

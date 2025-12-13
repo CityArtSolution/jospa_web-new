@@ -66,8 +66,6 @@ Route::get('/test-upload', function () {
     */
     Route::post('/staff/working-hours/{id}', [EmployeesController::class, 'store_working_houer'])->name('staff.working-hours.store');
 
-    // About Bookings
-
     Route::get('/loyalety' , [LoyaltyController::class , 'loyalety'])->name('home.loyalety');
 
 
@@ -438,3 +436,8 @@ Route::get('lang/{locale}', function ($locale) {
         Route::get('/reject/{id}', [RejectController::class, 'destroy'])->name('reject.destroy');
         Route::get('/gift/delete/{id}', [GiftController::class, 'destroy'])->name('gift.delete');
     });
+    
+    //  Get quick cart 
+    Route::get('/qu/cart', [SaloneBookController::class, 'getUserCart']);
+    Route::delete('/qu/cart/remove/{id}', [SaloneBookController::class, 'remove']);
+    

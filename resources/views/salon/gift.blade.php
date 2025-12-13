@@ -1085,8 +1085,8 @@
             <div id="step4" class="step-content hidden">
                 <div class="booking-payment">
                     <x-frontend.payment 
-                        :items-count="1" 
-                        :total-price="-1"
+                        :items-count="5" 
+                        :total-price="100"
                         page-name="gift"
                     />
                 </div>
@@ -1498,17 +1498,6 @@
         
                             const details = `
                                 <div style="margin-top:10px;">
-                                    <label style="font-size:13px;">الموظف:</label>
-                                    <input class="form-textarea" type="text" value="${sub.staffName || ''}"  disabled placeholder="الموظف" 
-                                           style="width:100%; padding:8px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
-                                    
-                                    <div style="display:flex; flex-direction:row-reverse; justify-content:flex-end; gap:6px;">
-                                        <input type="date" value="${sub.date || ''}" disabled 
-                                               style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;color: #BF9456;">
-                                        <input type="time"  value="${sub.time || ''}" disabled 
-                                               style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;color: #BF9456;">
-                                    </div>
-        
                                     <div style="text-align:right; font-weight:bold; color:#a36b2c; margin-top:8px;">
                                         السعر: ${sub.price || 0} ريال
                                     </div>

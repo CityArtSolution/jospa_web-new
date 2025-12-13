@@ -610,7 +610,7 @@
     @endif
 </div>
 
-    <div id="branchContainer" style="display:none;"></div>
+    <div id="branchContainer" style="display:none !important;"></div>
     <!-- Footer -->
     @include('components.frontend.footer')
 

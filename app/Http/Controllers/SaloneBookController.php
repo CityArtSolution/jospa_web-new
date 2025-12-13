@@ -10,6 +10,8 @@ use App\Models\ServiceGroupHome;
 use Modules\Package\Models\Package;
 use Modules\Package\Models\PackageService;
 use Illuminate\Support\Facades\DB;
+use Modules\Booking\Models\Booking;
+use Modules\Booking\Models\BookingService;
 
 class SaloneBookController extends Controller
 {
@@ -65,4 +67,27 @@ class SaloneBookController extends Controller
 
         return view('home.details', compact('package', 'services', 'totalServicePrice','totalService',  'branchDes' , 'branchName'));
     }
+
+
+    public function getUserCart()
+    {
+        $user = auth()->user(); 
+        $cartItems = Booking::with('service.service', 'products.product' , 'service.employee')->where('created_by', $user->id)->where('status', 'pending')->where('payment_type', 'payment')->whereNull('deleted_by')->where('payment_status', 0)->get();
+
+
+        return response()->json($cartItems);
+    }
+
+    public function remove($id)
+    {
+        $booking = Booking::find($id);
+        if ($booking) {
+            $booking->delete();
+            return response()->json(['success' => true]);
+        }
+        $bookingServices = BookingService::find($booking->id);
+        $bookingServices->delete();
+        return response()->json(['success' => false]);
+    }
+
 }    
